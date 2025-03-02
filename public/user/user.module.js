@@ -6,17 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionModule = void 0;
+exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
-const transaction_controller_1 = require("./transaction.controller");
-const transaction_service_1 = require("./transaction.service");
-let TransactionModule = class TransactionModule {
+const mongoose_1 = require("@nestjs/mongoose");
+const user_service_1 = require("./user.service");
+const user_controller_1 = require("./user.controller");
+const user_schema_1 = require("./user.schema");
+let UserModule = class UserModule {
 };
-exports.TransactionModule = TransactionModule;
-exports.TransactionModule = TransactionModule = __decorate([
+exports.UserModule = UserModule;
+exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        controllers: [transaction_controller_1.TransactionController],
-        providers: [transaction_service_1.TransactionService]
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]),
+        ],
+        providers: [user_service_1.UserService],
+        controllers: [user_controller_1.UserController],
     })
-], TransactionModule);
-//# sourceMappingURL=transaction.module.js.map
+], UserModule);
+//# sourceMappingURL=user.module.js.map
