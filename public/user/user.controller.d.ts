@@ -5,6 +5,6 @@ export declare class UserController {
     constructor(userService: UserService);
     findOne(id: string): Promise<userModel>;
     findAll(): Promise<userModel[]>;
-    isExist(id: string): Promise<Boolean>;
+    isExist(id: string): Promise<any>;
     createUser(id: string, name: string, avatar: string): Promise<userModel | string>;
 }

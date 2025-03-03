@@ -28,12 +28,8 @@ export class UserService {
     return data;
   }
 
-  async isExist(id: string): Promise<Boolean> {
-    const existingUser = await this.userModel.findOne({ id }).exec();
-    if (existingUser) {
-      return true;
-    }
-    return false;
+  async isExist(id: string): Promise<any> {
+    return await this.userModel.findOne({ id }).exec();
   }
 
   async createUser(id: string, name: string, avatar: string): Promise<User> {

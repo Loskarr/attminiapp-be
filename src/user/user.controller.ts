@@ -49,7 +49,7 @@ export class UserController {
   @ApiCreatedResponse({
     description: 'The record has been successfully retrieved.',
   })
-  async isExist(@Param('id') id: string): Promise<Boolean> {
+  async isExist(@Param('id') id: string): Promise<any> {
     return this.userService.isExist(id);
   }
 

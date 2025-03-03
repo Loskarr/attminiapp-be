@@ -36,11 +36,7 @@ let UserService = class UserService {
         return data;
     }
     async isExist(id) {
-        const existingUser = await this.userModel.findOne({ id }).exec();
-        if (existingUser) {
-            return true;
-        }
-        return false;
+        return await this.userModel.findOne({ id }).exec();
     }
     async createUser(id, name, avatar) {
         const newUser = new this.userModel({ id, name, avatar });

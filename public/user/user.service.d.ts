@@ -31,6 +31,6 @@ export declare class UserService {
     findOne(id: string): Promise<User>;
     findAll(): Promise<User[]>;
     findByName(nameFind: string): Promise<User>;
-    isExist(id: string): Promise<Boolean>;
+    isExist(id: string): Promise<any>;
     createUser(id: string, name: string, avatar: string): Promise<User>;
 }
