@@ -6,23 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModule = void 0;
+exports.LikeModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const user_service_1 = require("./user.service");
-const user_controller_1 = require("./user.controller");
-const user_schema_1 = require("./user.schema");
-let UserModule = class UserModule {
+const like_schema_1 = require("./like.schema");
+const like_service_1 = require("./like.service");
+let LikeModule = class LikeModule {
 };
-exports.UserModule = UserModule;
-exports.UserModule = UserModule = __decorate([
+exports.LikeModule = LikeModule;
+exports.LikeModule = LikeModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]),
-        ],
-        providers: [user_service_1.UserService],
-        controllers: [user_controller_1.UserController],
-        exports: [user_service_1.UserService],
+        imports: [mongoose_1.MongooseModule.forFeature([{ name: like_schema_1.Like.name, schema: like_schema_1.LikeSchema }])],
+        providers: [like_service_1.LikeService],
+        exports: [like_service_1.LikeService],
     })
-], UserModule);
-//# sourceMappingURL=user.module.js.map
+], LikeModule);
+//# sourceMappingURL=like.module.js.map

@@ -28,6 +28,7 @@ declare class Media {
     ytb_video_id: string;
 }
 export declare class Post extends Document {
+    id: string;
     title: string;
     slug: string;
     short_desc: string;
@@ -56,6 +57,8 @@ export declare class Post extends Document {
     created_by: string;
     updated_at: string;
     updated_by: string;
+    like: number;
+    comment: number;
 }
 export declare const PostSchema: import("mongoose").Schema<Post, import("mongoose").Model<Post, any, any, any, Document<unknown, any, Post> & Post & Required<{
     _id: unknown;

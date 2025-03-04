@@ -12,39 +12,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostsService = void 0;
+exports.LikeService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const post_schema_1 = require("./post.schema");
-let PostsService = class PostsService {
-    constructor(postModel) {
-        this.postModel = postModel;
+const like_schema_1 = require("./like.schema");
+let LikeService = class LikeService {
+    constructor(likeModel) {
+        this.likeModel = likeModel;
     }
-    async findPosts(limit, skip) {
-        return this.postModel.find().skip(skip).limit(limit).exec();
+    async likePost(user, post) {
+        const newLike = new this.likeModel({ user: user, post: post });
+        return newLike.save();
     }
-    async findOne(id) {
-        return this.postModel.findOne({ id: id }).exec();
+    async unlikePost(user, post) {
+        await this.likeModel.deleteOne({ user: user, post: post }).exec();
     }
-    async create(post) {
-        const newPost = new this.postModel(post);
-        return newPost.save();
+    async isLiked(user, post) {
+        const like = await this.likeModel.findOne({ user: user, post: post }).exec();
+        return !!like;
     }
-    async incrementLikes(postId) {
-        return this.postModel.findOneAndUpdate({ id: postId }, { $inc: { like: 1 } }, { new: true }).exec();
+    async getLikesForPost(post) {
+        return this.likeModel.find({ post: post }).populate('user').exec();
     }
-    async decrementLikes(postId) {
-        return this.postModel.findOneAndUpdate({ id: postId }, { $inc: { like: -1 } }, { new: true }).exec();
-    }
-    async incrementComments(postId) {
-        return this.postModel.findOneAndUpdate({ id: postId }, { $inc: { comment: 1 } }, { new: true }).exec();
+    async getLikeCountForPost(post) {
+        return this.likeModel.countDocuments({ post: post }).exec();
     }
 };
-exports.PostsService = PostsService;
-exports.PostsService = PostsService = __decorate([
+exports.LikeService = LikeService;
+exports.LikeService = LikeService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(post_schema_1.Post.name)),
+    __param(0, (0, mongoose_1.InjectModel)(like_schema_1.Like.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
-], PostsService);
-//# sourceMappingURL=posts.service.js.map
+], LikeService);
+//# sourceMappingURL=like.service.js.map

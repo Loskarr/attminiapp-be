@@ -24,14 +24,12 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from 'mongoose';
-import { Post } from './post.schema';
-export declare class PostsService {
-    private postModel;
-    constructor(postModel: Model<Post>);
-    findPosts(limit: number, skip: number): Promise<Post[]>;
-    findOne(id: string): Promise<Post>;
-    create(post: Post): Promise<Post>;
-    incrementLikes(postId: string): Promise<Post>;
-    decrementLikes(postId: string): Promise<Post>;
-    incrementComments(postId: string): Promise<Post>;
+import { Comment } from './comment.schema';
+import { UserService } from '../user/user.service';
+export declare class CommentService {
+    private commentModel;
+    private readonly userService;
+    constructor(commentModel: Model<Comment>, userService: UserService);
+    createComment(user: string, post: string, content: string): Promise<Comment>;
+    getCommentsByPostId(postId: string): Promise<Comment[]>;
 }

@@ -9,26 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserSchema = exports.User = void 0;
+exports.LikeSchema = exports.Like = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-let User = class User extends mongoose_2.Document {
+const user_schema_1 = require("../user/user.schema");
+const post_schema_1 = require("../posts/post.schema");
+let Like = class Like extends mongoose_2.Document {
 };
-exports.User = User;
+exports.Like = Like;
 __decorate([
-    (0, mongoose_1.Prop)({ required: true, unique: true }),
+    (0, mongoose_1.Prop)({ type: String, ref: user_schema_1.User.name, required: true }),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Like.prototype, "user", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ type: String, ref: post_schema_1.Post.name, required: true }),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], User.prototype, "avatar", void 0);
-exports.User = User = __decorate([
-    (0, mongoose_1.Schema)({ versionKey: false })
-], User);
-exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
-//# sourceMappingURL=user.schema.js.map
+], Like.prototype, "post", void 0);
+exports.Like = Like = __decorate([
+    (0, mongoose_1.Schema)({ timestamps: true, versionKey: false })
+], Like);
+exports.LikeSchema = mongoose_1.SchemaFactory.createForClass(Like);
+//# sourceMappingURL=like.schema.js.map

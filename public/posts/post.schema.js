@@ -22,6 +22,10 @@ let Post = class Post extends mongoose_2.Document {
 };
 exports.Post = Post;
 __decorate([
+    (0, mongoose_1.Prop)({ unique: true }),
+    __metadata("design:type", String)
+], Post.prototype, "id", void 0);
+__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Post.prototype, "title", void 0);
@@ -133,6 +137,14 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Post.prototype, "updated_by", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Post.prototype, "like", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Post.prototype, "comment", void 0);
 exports.Post = Post = __decorate([
     (0, mongoose_1.Schema)()
 ], Post);

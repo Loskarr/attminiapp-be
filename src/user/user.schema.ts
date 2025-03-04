@@ -8,7 +8,7 @@ import { Document } from 'mongoose';
 
 @Schema({ versionKey: false })
 export class User extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   id: string;
 
   @Prop()

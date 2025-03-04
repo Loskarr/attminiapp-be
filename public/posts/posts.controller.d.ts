@@ -1,9 +1,20 @@
 import { PostsService } from './posts.service';
 import { Post as PostModel } from './post.schema';
+import { LikeService } from '../likes/like.service';
+import { CommentService } from '../comments/comment.service';
+import { Comment } from '../comments/comment.schema';
 export declare class PostsController {
     private readonly postsService;
-    constructor(postsService: PostsService);
-    findAll(limit: number): Promise<PostModel[]>;
+    private readonly likeService;
+    private readonly commentService;
+    constructor(postsService: PostsService, likeService: LikeService, commentService: CommentService);
+    findAll(page?: number, limit?: number): Promise<PostModel[]>;
     findOne(id: string): Promise<PostModel>;
     create(post: PostModel): Promise<PostModel>;
+    likePost(postId: string, req: Request): Promise<any>;
+    isPostLiked(postId: string, req: Request): Promise<{
+        isLiked: boolean;
+    }>;
+    addComment(postId: string, req: Request, content: string): Promise<any>;
+    getCommentsForPost(postId: string): Promise<Comment[]>;
 }

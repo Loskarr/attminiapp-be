@@ -8,6 +8,10 @@ class Media {
 
 @Schema()
 export class Post extends Document {
+
+  @Prop({ unique: true })
+  id: string;
+
   @Prop({ required: true })
   title: string;
 
@@ -91,6 +95,12 @@ export class Post extends Document {
 
   @Prop()
   updated_by: string;
+
+  @Prop()
+  like: number;
+
+  @Prop()
+  comment: number;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

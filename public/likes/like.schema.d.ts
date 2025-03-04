@@ -23,15 +23,17 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Model } from 'mongoose';
-import { Post } from './post.schema';
-export declare class PostsService {
-    private postModel;
-    constructor(postModel: Model<Post>);
-    findPosts(limit: number, skip: number): Promise<Post[]>;
-    findOne(id: string): Promise<Post>;
-    create(post: Post): Promise<Post>;
-    incrementLikes(postId: string): Promise<Post>;
-    decrementLikes(postId: string): Promise<Post>;
-    incrementComments(postId: string): Promise<Post>;
+import { Document } from 'mongoose';
+export declare class Like extends Document {
+    user: string;
+    post: string;
 }
+export declare const LikeSchema: import("mongoose").Schema<Like, import("mongoose").Model<Like, any, any, any, Document<unknown, any, Like> & Like & Required<{
+    _id: unknown;
+}> & {
+    __v: number;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Like, Document<unknown, {}, import("mongoose").FlatRecord<Like>> & import("mongoose").FlatRecord<Like> & Required<{
+    _id: unknown;
+}> & {
+    __v: number;
+}>;
