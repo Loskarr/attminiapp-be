@@ -28,7 +28,7 @@ import { Post } from './post.schema';
 export declare class PostsService {
     private postModel;
     constructor(postModel: Model<Post>);
-    findPosts(limit: number, skip: number): Promise<Post[]>;
+    findPosts(limit: number, skip: number, category?: string): Promise<Post[]>;
     findOne(id: string): Promise<Post>;
     create(post: Post): Promise<Post>;
     incrementLikes(postId: string): Promise<Post>;

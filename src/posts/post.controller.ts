@@ -19,16 +19,18 @@ export class PostsController {
 
 
   @Get()
-  @ApiOperation({ summary: 'Get posts with limit', description: 'Retrieve posts with a limit' })
+  @ApiOperation({ summary: 'Get posts with limit and category', description: 'Retrieve posts with a limit and filter by category' })
   @ApiQuery({ name: 'page', type: Number, description: 'Page number', required: false })
   @ApiQuery({ name: 'limit', type: Number, description: 'Limit the number of posts', required: false })
+  @ApiQuery({ name: 'category', type: String, description: 'Filter by post category', required: false })
   @ApiCreatedResponse({ description: 'The records have been successfully retrieved.' })
   async findAll(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 20,
+    @Query('category') category?: string,
   ): Promise<PostModel[]> {
     const skip = (page - 1) * limit;
-    return this.postsService.findPosts(limit, skip);
+    return this.postsService.findPosts(limit, skip, category);
   }
 
   @Get(':id')

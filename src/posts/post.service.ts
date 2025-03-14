@@ -7,8 +7,12 @@ import { Post } from './post.schema';
 export class PostsService {
   constructor(@InjectModel(Post.name) private postModel: Model<Post>) {}
 
-  async findPosts(limit: number, skip: number): Promise<Post[]> {
-    return this.postModel.find().skip(skip).limit(limit).exec();
+  async findPosts(limit: number, skip: number, category?: string): Promise<Post[]> {
+    const filter: any = {};
+    if (category) {
+      filter.post_categories = { $in: [category] };
+    }
+    return this.postModel.find(filter).skip(skip).limit(limit).exec();
   }
 
   async findOne(id: string): Promise<Post> {

@@ -25,9 +25,9 @@ let PostsController = class PostsController {
         this.likeService = likeService;
         this.commentService = commentService;
     }
-    async findAll(page = 1, limit = 20) {
+    async findAll(page = 1, limit = 20, category) {
         const skip = (page - 1) * limit;
-        return this.postsService.findPosts(limit, skip);
+        return this.postsService.findPosts(limit, skip, category);
     }
     async findOne(id) {
         return this.postsService.findOne(id);
@@ -67,14 +67,16 @@ let PostsController = class PostsController {
 exports.PostsController = PostsController;
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get posts with limit', description: 'Retrieve posts with a limit' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get posts with limit and category', description: 'Retrieve posts with a limit and filter by category' }),
     (0, swagger_1.ApiQuery)({ name: 'page', type: Number, description: 'Page number', required: false }),
     (0, swagger_1.ApiQuery)({ name: 'limit', type: Number, description: 'Limit the number of posts', required: false }),
+    (0, swagger_1.ApiQuery)({ name: 'category', type: String, description: 'Filter by post category', required: false }),
     (0, swagger_1.ApiCreatedResponse)({ description: 'The records have been successfully retrieved.' }),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('limit')),
+    __param(2, (0, common_1.Query)('category')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:paramtypes", [Number, Number, String]),
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "findAll", null);
 __decorate([

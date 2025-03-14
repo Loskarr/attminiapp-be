@@ -21,8 +21,12 @@ let PostsService = class PostsService {
     constructor(postModel) {
         this.postModel = postModel;
     }
-    async findPosts(limit, skip) {
-        return this.postModel.find().skip(skip).limit(limit).exec();
+    async findPosts(limit, skip, category) {
+        const filter = {};
+        if (category) {
+            filter.post_categories = { $in: [category] };
+        }
+        return this.postModel.find(filter).skip(skip).limit(limit).exec();
     }
     async findOne(id) {
         return this.postModel.findOne({ id: id }).exec();
