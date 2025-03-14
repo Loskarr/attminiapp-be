@@ -17,7 +17,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const comment_schema_1 = require("./comment.schema");
-const user_service_1 = require("../user/user.service");
+const zuser_service_1 = require("../zusers/zuser.service");
 let CommentService = class CommentService {
     constructor(commentModel, userService) {
         this.commentModel = commentModel;
@@ -46,6 +46,6 @@ exports.CommentService = CommentService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(comment_schema_1.Comment.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
-        user_service_1.UserService])
+        zuser_service_1.UserService])
 ], CommentService);
 //# sourceMappingURL=comment.service.js.map

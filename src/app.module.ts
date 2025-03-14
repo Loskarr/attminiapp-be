@@ -4,10 +4,12 @@ import { AppService } from './app.service';
 import config from './config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostsModule } from './posts/post.module';
-import { UserModule } from './user/user.module';
+import { UserModule } from './zusers/zuser.module';
+import { CategoriesModule } from './categories/categories.module';
+import { TagModule } from './tags/tag.module';
 
 @Module({
-  imports: [MongooseModule.forRoot(config.mongo.url), PostsModule, UserModule],
+  imports: [MongooseModule.forRoot(config.mongo.url), PostsModule, UserModule, CategoriesModule, TagModule],
   controllers: [AppController],
   providers: [AppService],
 })

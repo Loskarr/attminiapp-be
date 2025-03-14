@@ -9,8 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const posts_service_1 = require("./posts.service");
-const posts_controller_1 = require("./posts.controller");
+const post_service_1 = require("./post.service");
+const post_controller_1 = require("./post.controller");
 const post_schema_1 = require("./post.schema");
 const like_module_1 = require("../likes/like.module");
 const comment_module_1 = require("../comments/comment.module");
@@ -20,8 +20,8 @@ exports.PostsModule = PostsModule;
 exports.PostsModule = PostsModule = __decorate([
     (0, common_1.Module)({
         imports: [mongoose_1.MongooseModule.forFeature([{ name: post_schema_1.Post.name, schema: post_schema_1.PostSchema }]), like_module_1.LikeModule, comment_module_1.CommentModule],
-        providers: [posts_service_1.PostsService],
-        controllers: [posts_controller_1.PostsController],
+        providers: [post_service_1.PostsService],
+        controllers: [post_controller_1.PostsController],
     })
 ], PostsModule);
 //# sourceMappingURL=post.module.js.map

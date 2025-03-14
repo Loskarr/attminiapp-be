@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Like } from './like.schema';
-import { User } from '../user/user.schema';
-import { Post } from '../posts/post.schema';
 
 @Injectable()
 export class LikeService {

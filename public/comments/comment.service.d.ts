@@ -25,7 +25,7 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from 'mongoose';
 import { Comment } from './comment.schema';
-import { UserService } from '../user/user.service';
+import { UserService } from '../zusers/zuser.service';
 export declare class CommentService {
     private commentModel;
     private readonly userService;

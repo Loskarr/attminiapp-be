@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Comment } from './comment.schema';
-import { UserService } from '../user/user.service'; // Import UserService
+import { UserService } from '../zusers/zuser.service'; // Import UserService
 
 @Injectable()
 export class CommentService {

@@ -11,13 +11,13 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const comment_schema_1 = require("./comment.schema");
 const comment_service_1 = require("./comment.service");
-const user_module_1 = require("../user/user.module");
+const zuser_module_1 = require("../zusers/zuser.module");
 let CommentModule = class CommentModule {
 };
 exports.CommentModule = CommentModule;
 exports.CommentModule = CommentModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: comment_schema_1.Comment.name, schema: comment_schema_1.CommentSchema }]), user_module_1.UserModule],
+        imports: [mongoose_1.MongooseModule.forFeature([{ name: comment_schema_1.Comment.name, schema: comment_schema_1.CommentSchema }]), zuser_module_1.UserModule],
         providers: [comment_service_1.CommentService],
         exports: [comment_service_1.CommentService],
     })

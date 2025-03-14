@@ -13,13 +13,15 @@ const app_service_1 = require("./app.service");
 const config_1 = require("./config");
 const mongoose_1 = require("@nestjs/mongoose");
 const post_module_1 = require("./posts/post.module");
-const user_module_1 = require("./user/user.module");
+const zuser_module_1 = require("./zusers/zuser.module");
+const categories_module_1 = require("./categories/categories.module");
+const tag_module_1 = require("./tags/tag.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forRoot(config_1.default.mongo.url), post_module_1.PostsModule, user_module_1.UserModule],
+        imports: [mongoose_1.MongooseModule.forRoot(config_1.default.mongo.url), post_module_1.PostsModule, zuser_module_1.UserModule, categories_module_1.CategoriesModule, tag_module_1.TagModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

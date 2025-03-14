@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LikeSchema = exports.Like = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const user_schema_1 = require("../user/user.schema");
+const zuser_schema_1 = require("../zusers/zuser.schema");
 const post_schema_1 = require("../posts/post.schema");
 let Like = class Like extends mongoose_2.Document {
 };
 exports.Like = Like;
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, ref: user_schema_1.User.name, required: true }),
+    (0, mongoose_1.Prop)({ type: String, ref: zuser_schema_1.ZUser.name, required: true }),
     __metadata("design:type", String)
 ], Like.prototype, "user", void 0);
 __decorate([
