@@ -34,4 +34,5 @@ export declare class PostsService {
     incrementLikes(postId: string): Promise<Post>;
     decrementLikes(postId: string): Promise<Post>;
     incrementComments(postId: string): Promise<Post>;
+    decrementComments(postId: string): Promise<Post>;
 }

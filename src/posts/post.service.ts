@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ObjectId } from 'mongodb';
 import { Post } from './post.schema';
 
 @Injectable()
@@ -21,7 +20,7 @@ export class PostsService {
   }
 
   async findOne(id: string): Promise<Post> {
-    return this.postModel.findOne({ _id: new ObjectId(id) }).exec();
+    return this.postModel.findOne({ _id: id }).exec();
   }
 
   async create(post: Post): Promise<Post> {
@@ -32,7 +31,7 @@ export class PostsService {
   async incrementLikes(postId: string): Promise<Post> {
     return this.postModel
       .findOneAndUpdate(
-        { _id: new ObjectId(postId) },
+        { _id: postId },
         { $inc: { like: 1 } },
         { new: true },
       )
@@ -42,7 +41,7 @@ export class PostsService {
   async decrementLikes(postId: string): Promise<Post> {
     return this.postModel
       .findOneAndUpdate(
-        { _id: new ObjectId(postId) },
+        { _id: postId },
         { $inc: { like: -1 } },
         { new: true },
       )
@@ -52,10 +51,20 @@ export class PostsService {
   async incrementComments(postId: string): Promise<Post> {
     return this.postModel
       .findOneAndUpdate(
-        { _id: new ObjectId(postId) },
+        { _id: postId},
         { $inc: { comment: 1 } },
         { new: true },
       )
       .exec();
   }
+
+  async decrementComments(postId: string): Promise<Post> {
+    return this.postModel
+      .findOneAndUpdate(
+        { _id: postId },
+        { $inc: { comment: -1 } },
+        { new: true },
+      )
+      .exec();
+    }
 }

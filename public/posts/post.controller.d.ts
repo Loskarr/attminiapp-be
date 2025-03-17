@@ -17,4 +17,6 @@ export declare class PostsController {
     }>;
     addComment(postId: string, req: Request, content: string): Promise<any>;
     getCommentsForPost(postId: string): Promise<Comment[]>;
+    deleteComment(commentId: string, userId: string): Promise<void>;
+    updateComment(commentId: string, userId: string, content: string): Promise<Comment>;
 }

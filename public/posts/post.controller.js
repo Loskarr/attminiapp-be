@@ -19,6 +19,7 @@ const post_service_1 = require("./post.service");
 const post_schema_1 = require("./post.schema");
 const like_service_1 = require("../likes/like.service");
 const comment_service_1 = require("../comments/comment.service");
+const comment_schema_1 = require("../comments/comment.schema");
 let PostsController = class PostsController {
     constructor(postsService, likeService, commentService) {
         this.postsService = postsService;
@@ -62,6 +63,27 @@ let PostsController = class PostsController {
     }
     async getCommentsForPost(postId) {
         return this.commentService.getCommentsByPostId(postId);
+    }
+    async deleteComment(commentId, userId) {
+        const comment = await this.commentService.getCommentById(commentId);
+        if (!comment) {
+            throw new common_1.NotFoundException('Comment not found');
+        }
+        if (comment.user !== userId) {
+            throw new common_1.ForbiddenException('You are not authorized to delete this comment');
+        }
+        await this.commentService.deleteComment(commentId);
+        await this.postsService.decrementComments(comment.post);
+    }
+    async updateComment(commentId, userId, content) {
+        const comment = await this.commentService.getCommentById(commentId);
+        if (!comment) {
+            throw new common_1.NotFoundException('Comment not found');
+        }
+        if (comment.user !== userId) {
+            throw new common_1.ForbiddenException('You are not authorized to update this comment');
+        }
+        return this.commentService.updateComment(commentId, content);
     }
 };
 exports.PostsController = PostsController;
@@ -151,6 +173,43 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "getCommentsForPost", null);
+__decorate([
+    (0, common_1.Delete)(':id/comments/:commentId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a comment from a post', description: 'Delete a specific comment from a post' }),
+    (0, swagger_1.ApiParam)({ name: 'id', type: String, description: 'ID of the post' }),
+    (0, swagger_1.ApiParam)({ name: 'commentId', type: String, description: 'ID of the comment to delete' }),
+    (0, swagger_1.ApiHeader)({ name: 'userId', description: 'ID of the user' }),
+    (0, swagger_1.ApiNoContentResponse)({ description: 'Comment deleted successfully' }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
+    __param(0, (0, common_1.Param)('commentId')),
+    __param(1, (0, common_1.Headers)('userId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], PostsController.prototype, "deleteComment", null);
+__decorate([
+    (0, common_1.Put)(':id/comments/:commentId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a comment', description: 'Update the content of a specific comment' }),
+    (0, swagger_1.ApiParam)({ name: 'id', type: String, description: 'ID of the post' }),
+    (0, swagger_1.ApiParam)({ name: 'commentId', type: String, description: 'ID of the comment to update' }),
+    (0, swagger_1.ApiHeader)({ name: 'userId', description: 'ID of the user' }),
+    (0, swagger_1.ApiBody)({
+        schema: {
+            type: 'object',
+            properties: {
+                content: { type: 'string', description: 'New content for the comment' },
+            },
+            required: ['content'],
+        },
+    }),
+    (0, swagger_1.ApiOkResponse)({ description: 'Comment updated successfully', type: comment_schema_1.Comment }),
+    __param(0, (0, common_1.Param)('commentId')),
+    __param(1, (0, common_1.Headers)('userId')),
+    __param(2, (0, common_1.Body)('content')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", Promise)
+], PostsController.prototype, "updateComment", null);
 exports.PostsController = PostsController = __decorate([
     (0, common_1.Controller)('posts'),
     (0, swagger_1.ApiTags)('posts'),

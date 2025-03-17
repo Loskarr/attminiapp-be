@@ -32,4 +32,7 @@ export declare class CommentService {
     constructor(commentModel: Model<Comment>, userService: UserService);
     createComment(user: string, post: string, content: string): Promise<Comment>;
     getCommentsByPostId(postId: string): Promise<Comment[]>;
+    getCommentById(commentId: string): Promise<Comment>;
+    deleteComment(commentId: string): Promise<void>;
+    updateComment(commentId: string, content: string): Promise<Comment>;
 }

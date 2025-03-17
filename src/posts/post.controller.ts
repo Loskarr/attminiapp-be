@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Param, Body, Query, Req } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBody, ApiParam, ApiCreatedResponse, ApiQuery, ApiHeader } from '@nestjs/swagger';
+import { Controller, Get, Post, Param, Body, Query, Req, Headers, Delete, Put, HttpCode, HttpStatus, ForbiddenException, NotFoundException } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBody, ApiParam, ApiCreatedResponse, ApiQuery, ApiHeader, ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
 import { PostsService } from './post.service';
 import { Post as PostModel } from './post.schema';
 import { LikeService } from '../likes/like.service';
@@ -113,5 +113,60 @@ export class PostsController {
   @ApiParam({ name: 'id', type: String, description: 'ID of the post' })
   async getCommentsForPost(@Param('id') postId: string): Promise<Comment[]> {
     return this.commentService.getCommentsByPostId(postId);
+  }
+
+  @Delete(':id/comments/:commentId')
+  @ApiOperation({ summary: 'Delete a comment from a post', description: 'Delete a specific comment from a post' })
+  @ApiParam({ name: 'id', type: String, description: 'ID of the post' })
+  @ApiParam({ name: 'commentId', type: String, description: 'ID of the comment to delete' })
+  @ApiHeader({ name: 'userId', description: 'ID of the user' })
+  @ApiNoContentResponse({ description: 'Comment deleted successfully' })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteComment(
+    @Param('commentId') commentId: string,
+    @Headers('userId') userId: string,
+  ): Promise<void> {
+    const comment = await this.commentService.getCommentById(commentId);
+
+    if (!comment) {
+      throw new NotFoundException('Comment not found');
+    }
+    if (comment.user !== userId) {
+      throw new ForbiddenException('You are not authorized to delete this comment');
+    }
+
+    await this.commentService.deleteComment(commentId);
+    await this.postsService.decrementComments(comment.post);
+  }
+
+  @Put(':id/comments/:commentId')
+  @ApiOperation({ summary: 'Update a comment', description: 'Update the content of a specific comment' })
+  @ApiParam({ name: 'id', type: String, description: 'ID of the post' })
+  @ApiParam({ name: 'commentId', type: String, description: 'ID of the comment to update' })
+  @ApiHeader({ name: 'userId', description: 'ID of the user' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        content: { type: 'string', description: 'New content for the comment' },
+      },
+      required: ['content'],
+    },
+  })
+  @ApiOkResponse({ description: 'Comment updated successfully', type: Comment })
+  async updateComment(
+    @Param('commentId') commentId: string,
+    @Headers('userId') userId: string,
+    @Body('content') content: string,
+  ): Promise<Comment> {
+    const comment = await this.commentService.getCommentById(commentId);
+
+    if (!comment) {
+      throw new NotFoundException('Comment not found');
+    }
+    if (comment.user !== userId) {
+      throw new ForbiddenException('You are not authorized to update this comment');
+    }
+    return this.commentService.updateComment(commentId, content);
   }
 }
