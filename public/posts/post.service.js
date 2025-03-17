@@ -16,6 +16,7 @@ exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const mongodb_1 = require("mongodb");
 const post_schema_1 = require("./post.schema");
 let PostsService = class PostsService {
     constructor(postModel) {
@@ -29,20 +30,26 @@ let PostsService = class PostsService {
         return this.postModel.find(filter).skip(skip).limit(limit).exec();
     }
     async findOne(id) {
-        return this.postModel.findOne({ id: id }).exec();
+        return this.postModel.findOne({ _id: new mongodb_1.ObjectId(id) }).exec();
     }
     async create(post) {
         const newPost = new this.postModel(post);
         return newPost.save();
     }
     async incrementLikes(postId) {
-        return this.postModel.findOneAndUpdate({ id: postId }, { $inc: { like: 1 } }, { new: true }).exec();
+        return this.postModel
+            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, { $inc: { like: 1 } }, { new: true })
+            .exec();
     }
     async decrementLikes(postId) {
-        return this.postModel.findOneAndUpdate({ id: postId }, { $inc: { like: -1 } }, { new: true }).exec();
+        return this.postModel
+            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, { $inc: { like: -1 } }, { new: true })
+            .exec();
     }
     async incrementComments(postId) {
-        return this.postModel.findOneAndUpdate({ id: postId }, { $inc: { comment: 1 } }, { new: true }).exec();
+        return this.postModel
+            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, { $inc: { comment: 1 } }, { new: true })
+            .exec();
     }
 };
 exports.PostsService = PostsService;

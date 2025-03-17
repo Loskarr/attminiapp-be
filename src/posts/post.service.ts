@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ObjectId } from 'mongodb';
 import { Post } from './post.schema';
 
 @Injectable()
 export class PostsService {
   constructor(@InjectModel(Post.name) private postModel: Model<Post>) {}
 
-  async findPosts(limit: number, skip: number, category?: string): Promise<Post[]> {
+  async findPosts(
+    limit: number,
+    skip: number,
+    category?: string,
+  ): Promise<Post[]> {
     const filter: any = {};
     if (category) {
       filter.post_categories = { $in: [category] };
@@ -16,7 +21,7 @@ export class PostsService {
   }
 
   async findOne(id: string): Promise<Post> {
-    return this.postModel.findOne({ id: id }).exec();
+    return this.postModel.findOne({ _id: new ObjectId(id) }).exec();
   }
 
   async create(post: Post): Promise<Post> {
@@ -25,26 +30,32 @@ export class PostsService {
   }
 
   async incrementLikes(postId: string): Promise<Post> {
-    return this.postModel.findOneAndUpdate(
-      { id: postId },
-      { $inc: { like: 1 } },
-      { new: true }
-    ).exec();
+    return this.postModel
+      .findOneAndUpdate(
+        { _id: new ObjectId(postId) },
+        { $inc: { like: 1 } },
+        { new: true },
+      )
+      .exec();
   }
 
   async decrementLikes(postId: string): Promise<Post> {
-    return this.postModel.findOneAndUpdate(
-      { id: postId },
-      { $inc: { like: -1 } },
-      { new: true }
-    ).exec();
+    return this.postModel
+      .findOneAndUpdate(
+        { _id: new ObjectId(postId) },
+        { $inc: { like: -1 } },
+        { new: true },
+      )
+      .exec();
   }
 
   async incrementComments(postId: string): Promise<Post> {
-    return this.postModel.findOneAndUpdate(
-      { id: postId },
-      { $inc: { comment: 1 } },
-      { new: true }
-    ).exec();
+    return this.postModel
+      .findOneAndUpdate(
+        { _id: new ObjectId(postId) },
+        { $inc: { comment: 1 } },
+        { new: true },
+      )
+      .exec();
   }
 }
