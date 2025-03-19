@@ -11,12 +11,29 @@ export class PostsService {
     limit: number,
     skip: number,
     category?: string,
+    sortBy?: string,
   ): Promise<Post[]> {
     const filter: any = {};
     if (category) {
       filter.post_categories = { $in: [category] };
     }
-    return this.postModel.find(filter).skip(skip).limit(limit).exec();
+
+    let sortOptions = {};
+    if (sortBy === 'view') {
+      sortOptions = { view: -1 }; // Sort by view count descending
+    } else if (sortBy === 'created_at') {
+      sortOptions = { createdAt: -1 }; // Sort by createdAt descending
+      //sortOptions = { created_at: -1 }; // Sort by created_at descending
+    } else {
+      sortOptions = { createdAt: -1 };
+    }
+
+    return this.postModel
+      .find(filter)
+      .skip(skip)
+      .limit(limit)
+      .sort(sortOptions)
+      .exec();
   }
 
   async findOne(id: string): Promise<Post> {

@@ -21,12 +21,27 @@ let PostsService = class PostsService {
     constructor(postModel) {
         this.postModel = postModel;
     }
-    async findPosts(limit, skip, category) {
+    async findPosts(limit, skip, category, sortBy) {
         const filter = {};
         if (category) {
             filter.post_categories = { $in: [category] };
         }
-        return this.postModel.find(filter).skip(skip).limit(limit).exec();
+        let sortOptions = {};
+        if (sortBy === 'view') {
+            sortOptions = { view: -1 };
+        }
+        else if (sortBy === 'created_at') {
+            sortOptions = { createdAt: -1 };
+        }
+        else {
+            sortOptions = { createdAt: -1 };
+        }
+        return this.postModel
+            .find(filter)
+            .skip(skip)
+            .limit(limit)
+            .sort(sortOptions)
+            .exec();
     }
     async findOne(id) {
         return this.postModel.findOne({ _id: id }).exec();

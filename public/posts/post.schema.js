@@ -145,6 +145,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
 ], Post.prototype, "comment", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Date)
+], Post.prototype, "createdAt", void 0);
 exports.Post = Post = __decorate([
     (0, mongoose_1.Schema)()
 ], Post);

@@ -101,6 +101,9 @@ export class Post extends Document {
 
   @Prop()
   comment: number;
+
+  @Prop()
+  createdAt: Date;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

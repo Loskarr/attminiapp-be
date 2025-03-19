@@ -59,6 +59,7 @@ export declare class Post extends Document {
     updated_by: string;
     like: number;
     comment: number;
+    createdAt: Date;
 }
 export declare const PostSchema: import("mongoose").Schema<Post, import("mongoose").Model<Post, any, any, any, Document<unknown, any, Post> & Post & Required<{
     _id: unknown;
