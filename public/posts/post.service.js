@@ -21,10 +21,15 @@ let PostsService = class PostsService {
     constructor(postModel) {
         this.postModel = postModel;
     }
-    async findPosts(limit, skip, category, sortBy) {
+    async findPosts(limit, skip, category, sortBy, query) {
         const filter = {};
         if (category) {
             filter.post_categories = { $in: [category] };
+        }
+        if (query) {
+            filter.$or = [
+                { title: { $regex: query, $options: 'i' } },
+            ];
         }
         let sortOptions = {};
         if (sortBy === 'view') {
@@ -68,6 +73,17 @@ let PostsService = class PostsService {
     async decrementComments(postId) {
         return this.postModel
             .findOneAndUpdate({ _id: postId }, { $inc: { comment: -1 } }, { new: true })
+            .exec();
+    }
+    async searchPosts(query, limit, skip) {
+        return this.postModel.find({
+            $or: [
+                { title: { $regex: query, $options: 'i' } },
+                { tags: { $in: [query] } },
+            ]
+        })
+            .skip(skip)
+            .limit(limit)
             .exec();
     }
 };

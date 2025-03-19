@@ -8,7 +8,7 @@ export declare class PostsController {
     private readonly likeService;
     private readonly commentService;
     constructor(postsService: PostsService, likeService: LikeService, commentService: CommentService);
-    findAll(page?: number, limit?: number, category?: string, sortBy?: string): Promise<PostModel[]>;
+    findAll(page?: number, limit?: number, category?: string, sortBy?: string, query?: string): Promise<PostModel[]>;
     findOne(id: string): Promise<PostModel>;
     create(post: PostModel): Promise<PostModel>;
     likePost(postId: string, req: Request): Promise<any>;

@@ -12,10 +12,19 @@ export class PostsService {
     skip: number,
     category?: string,
     sortBy?: string,
+    query?: string,
   ): Promise<Post[]> {
     const filter: any = {};
     if (category) {
       filter.post_categories = { $in: [category] };
+    }
+    if (query) {
+      filter.$or = [
+        { title: { $regex: query, $options: 'i' } },
+        //{ content: { $regex: query, $options: 'i' } },
+        //{ tags: { $in: [query] } },
+        //{ keyword: { $regex: query, $options: 'i' } },
+      ];
     }
 
     let sortOptions = {};
@@ -23,7 +32,6 @@ export class PostsService {
       sortOptions = { view: -1 }; // Sort by view count descending
     } else if (sortBy === 'created_at') {
       sortOptions = { createdAt: -1 }; // Sort by createdAt descending
-      //sortOptions = { created_at: -1 }; // Sort by created_at descending
     } else {
       sortOptions = { createdAt: -1 };
     }
@@ -84,4 +92,18 @@ export class PostsService {
       )
       .exec();
     }
+
+  async searchPosts(query: string, limit: number, skip: number): Promise<Post[]> {
+    return this.postModel.find({
+      $or: [
+        { title: { $regex: query, $options: 'i' } },
+        //{ content: { $regex: query, $options: 'i' } },
+        { tags: { $in: [query] } },
+        //{ keyword: { $regex: query, $options: 'i' } }
+      ]
+    })
+    .skip(skip)
+    .limit(limit)
+    .exec();
+  }
 }

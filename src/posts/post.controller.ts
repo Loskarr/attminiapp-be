@@ -24,15 +24,17 @@ export class PostsController {
   @ApiQuery({ name: 'limit', type: Number, description: 'Limit the number of posts', required: false })
   @ApiQuery({ name: 'category', type: String, description: 'Filter by post category', required: false })
   @ApiQuery({ name: 'sortBy', type: String, description: 'Sort by view or created_at', required: false })
+  @ApiQuery({ name: 'query', type: String, description: 'Search query', required: false })
   @ApiCreatedResponse({ description: 'The records have been successfully retrieved.' })
   async findAll(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 20,
     @Query('category') category?: string,
     @Query('sortBy') sortBy?: string,
+    @Query('query') query?: string,
   ): Promise<PostModel[]> {
     const skip = (page - 1) * limit;
-    return this.postsService.findPosts(limit, skip, category, sortBy);
+    return this.postsService.findPosts(limit, skip, category, sortBy, query);
   }
 
   @Get(':id')
@@ -171,4 +173,5 @@ export class PostsController {
     }
     return this.commentService.updateComment(commentId, content);
   }
+
 }
