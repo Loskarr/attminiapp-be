@@ -11,7 +11,11 @@ export class CommentService {
     private readonly userService: UserService, // Inject UserService
   ) {}
 
-  async createComment(user: string, post: string, content: string): Promise<Comment> {
+  async createComment(
+    user: string,
+    post: string,
+    content: string,
+  ): Promise<Comment> {
     const foundUser = await this.userService.findOne(user);
 
     if (!foundUser) {
@@ -29,7 +33,10 @@ export class CommentService {
   }
 
   async getCommentsByPostId(postId: string): Promise<Comment[]> {
-    return this.commentModel.find({ post: postId }).sort({ createdAt: -1 }).exec();
+    return this.commentModel
+      .find({ post: postId })
+      .sort({ createdAt: -1 })
+      .exec();
   }
 
   async getCommentById(commentId: string): Promise<Comment> {
@@ -49,11 +56,7 @@ export class CommentService {
 
   async updateComment(commentId: string, content: string): Promise<Comment> {
     const updatedComment = await this.commentModel
-      .findOneAndUpdate(
-        { _id: commentId },
-        { content: content },
-        { new: true },
-      )
+      .findOneAndUpdate({ _id: commentId }, { content: content }, { new: true })
       .exec();
 
     if (!updatedComment) {

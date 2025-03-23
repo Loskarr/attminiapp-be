@@ -76,11 +76,12 @@ let PostsService = class PostsService {
             .exec();
     }
     async searchPosts(query, limit, skip) {
-        return this.postModel.find({
+        return this.postModel
+            .find({
             $or: [
                 { title: { $regex: query, $options: 'i' } },
                 { tags: { $in: [query] } },
-            ]
+            ],
         })
             .skip(skip)
             .limit(limit)

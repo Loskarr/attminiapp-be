@@ -16,7 +16,9 @@ let LikeModule = class LikeModule {
 exports.LikeModule = LikeModule;
 exports.LikeModule = LikeModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: like_schema_1.Like.name, schema: like_schema_1.LikeSchema }])],
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: like_schema_1.Like.name, schema: like_schema_1.LikeSchema }]),
+        ],
         providers: [like_service_1.LikeService],
         exports: [like_service_1.LikeService],
     })

@@ -55,28 +55,20 @@ export class PostsService {
 
   async incrementLikes(postId: string): Promise<Post> {
     return this.postModel
-      .findOneAndUpdate(
-        { _id: postId },
-        { $inc: { like: 1 } },
-        { new: true },
-      )
+      .findOneAndUpdate({ _id: postId }, { $inc: { like: 1 } }, { new: true })
       .exec();
   }
 
   async decrementLikes(postId: string): Promise<Post> {
     return this.postModel
-      .findOneAndUpdate(
-        { _id: postId },
-        { $inc: { like: -1 } },
-        { new: true },
-      )
+      .findOneAndUpdate({ _id: postId }, { $inc: { like: -1 } }, { new: true })
       .exec();
   }
 
   async incrementComments(postId: string): Promise<Post> {
     return this.postModel
       .findOneAndUpdate(
-        { _id: postId},
+        { _id: postId },
         { $inc: { comment: 1 } },
         { new: true },
       )
@@ -91,19 +83,24 @@ export class PostsService {
         { new: true },
       )
       .exec();
-    }
+  }
 
-  async searchPosts(query: string, limit: number, skip: number): Promise<Post[]> {
-    return this.postModel.find({
-      $or: [
-        { title: { $regex: query, $options: 'i' } },
-        //{ content: { $regex: query, $options: 'i' } },
-        { tags: { $in: [query] } },
-        //{ keyword: { $regex: query, $options: 'i' } }
-      ]
-    })
-    .skip(skip)
-    .limit(limit)
-    .exec();
+  async searchPosts(
+    query: string,
+    limit: number,
+    skip: number,
+  ): Promise<Post[]> {
+    return this.postModel
+      .find({
+        $or: [
+          { title: { $regex: query, $options: 'i' } },
+          //{ content: { $regex: query, $options: 'i' } },
+          { tags: { $in: [query] } },
+          //{ keyword: { $regex: query, $options: 'i' } }
+        ],
+      })
+      .skip(skip)
+      .limit(limit)
+      .exec();
   }
 }

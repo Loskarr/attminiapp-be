@@ -13,12 +13,12 @@ const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 5000;
 
 // CREATE CONFIG OBJECT
 const config = {
-    mongo: {
-        url: MONGO_URL,
-    },
-    server: {
-        port: SERVER_PORT,
-    },
+  mongo: {
+    url: MONGO_URL,
+  },
+  server: {
+    port: SERVER_PORT,
+  },
 };
 
 config.mongo.url = MONGO_URL;

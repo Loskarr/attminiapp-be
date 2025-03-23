@@ -38,7 +38,10 @@ let CommentService = class CommentService {
         return newComment.save();
     }
     async getCommentsByPostId(postId) {
-        return this.commentModel.find({ post: postId }).sort({ createdAt: -1 }).exec();
+        return this.commentModel
+            .find({ post: postId })
+            .sort({ createdAt: -1 })
+            .exec();
     }
     async getCommentById(commentId) {
         const comment = await this.commentModel.findById(commentId).exec();

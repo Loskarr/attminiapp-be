@@ -17,7 +17,10 @@ let CommentModule = class CommentModule {
 exports.CommentModule = CommentModule;
 exports.CommentModule = CommentModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: comment_schema_1.Comment.name, schema: comment_schema_1.CommentSchema }]), zuser_module_1.UserModule],
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: comment_schema_1.Comment.name, schema: comment_schema_1.CommentSchema }]),
+            zuser_module_1.UserModule,
+        ],
         providers: [comment_service_1.CommentService],
         exports: [comment_service_1.CommentService],
     })

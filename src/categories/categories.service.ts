@@ -4,7 +4,9 @@ import { Model } from 'mongoose';
 import { Category } from './category.schema';
 @Injectable()
 export class CategoriesService {
-  constructor(@InjectModel(Category.name) private categoryModel: Model<Category>) {}
+  constructor(
+    @InjectModel(Category.name) private categoryModel: Model<Category>,
+  ) {}
 
   async create(category: Category): Promise<Category> {
     const createdCategory = new this.categoryModel(category);
@@ -20,7 +22,9 @@ export class CategoriesService {
   }
 
   async update(id: string, category: Category): Promise<Category> {
-    return this.categoryModel.findByIdAndUpdate(id, category, { new: true }).exec();
+    return this.categoryModel
+      .findByIdAndUpdate(id, category, { new: true })
+      .exec();
   }
 
   async remove(id: string): Promise<void> {

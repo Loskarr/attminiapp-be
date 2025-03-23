@@ -21,7 +21,13 @@ let AppModule = class AppModule {
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forRoot(config_1.default.mongo.url), post_module_1.PostsModule, zuser_module_1.UserModule, categories_module_1.CategoriesModule, tag_module_1.TagModule],
+        imports: [
+            mongoose_1.MongooseModule.forRoot(config_1.default.mongo.url),
+            post_module_1.PostsModule,
+            zuser_module_1.UserModule,
+            categories_module_1.CategoriesModule,
+            tag_module_1.TagModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

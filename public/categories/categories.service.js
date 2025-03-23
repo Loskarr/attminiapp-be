@@ -32,7 +32,9 @@ let CategoriesService = class CategoriesService {
         return this.categoryModel.findById(id).exec();
     }
     async update(id, category) {
-        return this.categoryModel.findByIdAndUpdate(id, category, { new: true }).exec();
+        return this.categoryModel
+            .findByIdAndUpdate(id, category, { new: true })
+            .exec();
     }
     async remove(id) {
         await this.categoryModel.findByIdAndDelete(id).exec();

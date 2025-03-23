@@ -8,7 +8,6 @@ class Media {
 
 @Schema()
 export class Post extends Document {
-
   @Prop({ unique: true })
   id: string;
 

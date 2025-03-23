@@ -32,7 +32,9 @@ let TagService = class TagService {
         return this.tagModel.findOne({ id: id }).exec();
     }
     async update(id, tag) {
-        return this.tagModel.findOneAndUpdate({ id: id }, tag, { new: true }).exec();
+        return this.tagModel
+            .findOneAndUpdate({ id: id }, tag, { new: true })
+            .exec();
     }
     async remove(id) {
         await this.tagModel.deleteOne({ id: id }).exec();

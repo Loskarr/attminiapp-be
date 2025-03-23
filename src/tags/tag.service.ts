@@ -21,7 +21,9 @@ export class TagService {
   }
 
   async update(id: string, tag: Tag): Promise<Tag> {
-    return this.tagModel.findOneAndUpdate({ id: id }, tag, { new: true }).exec();
+    return this.tagModel
+      .findOneAndUpdate({ id: id }, tag, { new: true })
+      .exec();
   }
 
   async remove(id: string): Promise<void> {

@@ -42,7 +42,9 @@ __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiOperation)({ summary: 'Create a tag', description: 'Create a new tag' }),
     (0, swagger_1.ApiBody)({ type: tag_schema_1.Tag }),
-    (0, swagger_1.ApiCreatedResponse)({ description: 'The record has been successfully created.' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The record has been successfully created.',
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [tag_schema_1.Tag]),
@@ -51,16 +53,23 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Get all tags', description: 'Retrieve all tags' }),
-    (0, swagger_1.ApiCreatedResponse)({ description: 'The records have been successfully retrieved.' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The records have been successfully retrieved.',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TagController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get tag by ID', description: 'Retrieve a tag by its ID' }),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get tag by ID',
+        description: 'Retrieve a tag by its ID',
+    }),
     (0, swagger_1.ApiParam)({ name: 'id', type: String, description: 'ID of the tag' }),
-    (0, swagger_1.ApiCreatedResponse)({ description: 'The record has been successfully retrieved.' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The record has been successfully retrieved.',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -68,10 +77,15 @@ __decorate([
 ], TagController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Update a tag', description: 'Update a tag by its ID' }),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Update a tag',
+        description: 'Update a tag by its ID',
+    }),
     (0, swagger_1.ApiParam)({ name: 'id', type: String, description: 'ID of the tag' }),
     (0, swagger_1.ApiBody)({ type: tag_schema_1.Tag }),
-    (0, swagger_1.ApiCreatedResponse)({ description: 'The record has been successfully updated.' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The record has been successfully updated.',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -80,9 +94,14 @@ __decorate([
 ], TagController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Delete a tag', description: 'Delete a tag by its ID' }),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Delete a tag',
+        description: 'Delete a tag by its ID',
+    }),
     (0, swagger_1.ApiParam)({ name: 'id', type: String, description: 'ID of the tag' }),
-    (0, swagger_1.ApiCreatedResponse)({ description: 'The record has been successfully deleted.' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The record has been successfully deleted.',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

@@ -7,7 +7,11 @@ import { LikeModule } from '../likes/like.module';
 import { CommentModule } from '../comments/comment.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Post.name, schema: PostSchema }]), LikeModule, CommentModule],
+  imports: [
+    MongooseModule.forFeature([{ name: Post.name, schema: PostSchema }]),
+    LikeModule,
+    CommentModule,
+  ],
   providers: [PostsService],
   controllers: [PostsController],
 })
