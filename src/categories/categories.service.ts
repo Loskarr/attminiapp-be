@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ObjectId } from 'mongodb';
 import { Category } from './category.schema';
 @Injectable()
 export class CategoriesService {
-  constructor(@InjectModel(Category.name) private categoryModel: Model<Category>) {}
+  constructor(
+    @InjectModel(Category.name) private categoryModel: Model<Category>,
+  ) {}
 
   async create(category: Category): Promise<Category> {
     const createdCategory = new this.categoryModel(category);
@@ -16,14 +19,18 @@ export class CategoriesService {
   }
 
   async findOne(id: string): Promise<Category> {
-    return this.categoryModel.findById(id).exec();
+    return this.categoryModel.findById({ _id: new ObjectId(id) }).exec();
   }
 
   async update(id: string, category: Category): Promise<Category> {
-    return this.categoryModel.findByIdAndUpdate(id, category, { new: true }).exec();
+    return this.categoryModel
+      .findByIdAndUpdate({ _id: new ObjectId(id) }, category, { new: true })
+      .exec();
   }
 
   async remove(id: string): Promise<void> {
-    await this.categoryModel.findByIdAndDelete(id).exec();
+    await this.categoryModel
+      .findByIdAndDelete({ _id: new ObjectId(id) })
+      .exec();
   }
 }

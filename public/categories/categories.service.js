@@ -16,6 +16,7 @@ exports.CategoriesService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const mongodb_1 = require("mongodb");
 const category_schema_1 = require("./category.schema");
 let CategoriesService = class CategoriesService {
     constructor(categoryModel) {
@@ -29,13 +30,17 @@ let CategoriesService = class CategoriesService {
         return this.categoryModel.find().exec();
     }
     async findOne(id) {
-        return this.categoryModel.findById(id).exec();
+        return this.categoryModel.findById({ _id: new mongodb_1.ObjectId(id) }).exec();
     }
     async update(id, category) {
-        return this.categoryModel.findByIdAndUpdate(id, category, { new: true }).exec();
+        return this.categoryModel
+            .findByIdAndUpdate({ _id: new mongodb_1.ObjectId(id) }, category, { new: true })
+            .exec();
     }
     async remove(id) {
-        await this.categoryModel.findByIdAndDelete(id).exec();
+        await this.categoryModel
+            .findByIdAndDelete({ _id: new mongodb_1.ObjectId(id) })
+            .exec();
     }
 };
 exports.CategoriesService = CategoriesService;

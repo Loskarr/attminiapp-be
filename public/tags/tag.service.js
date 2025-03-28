@@ -16,6 +16,7 @@ exports.TagService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const mongodb_1 = require("mongodb");
 const tag_schema_1 = require("./tag.schema");
 let TagService = class TagService {
     constructor(tagModel) {
@@ -29,13 +30,15 @@ let TagService = class TagService {
         return this.tagModel.find().exec();
     }
     async findOne(id) {
-        return this.tagModel.findOne({ id: id }).exec();
+        return this.tagModel.findOne({ _id: new mongodb_1.ObjectId(id) }).exec();
     }
     async update(id, tag) {
-        return this.tagModel.findOneAndUpdate({ id: id }, tag, { new: true }).exec();
+        return this.tagModel
+            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(id) }, tag, { new: true })
+            .exec();
     }
     async remove(id) {
-        await this.tagModel.deleteOne({ id: id }).exec();
+        await this.tagModel.deleteOne({ _id: new mongodb_1.ObjectId(id) }).exec();
     }
 };
 exports.TagService = TagService;
