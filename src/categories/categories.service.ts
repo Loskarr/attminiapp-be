@@ -24,11 +24,7 @@ export class CategoriesService {
 
   async update(id: string, category: Category): Promise<Category> {
     return this.categoryModel
-<<<<<<< HEAD
       .findByIdAndUpdate({ _id: new ObjectId(id) }, category, { new: true })
-=======
-      .findByIdAndUpdate(id, category, { new: true })
->>>>>>> 59b85be63f650fff9714c4e80a1896fcea16f830
       .exec();
   }
 
