@@ -23,7 +23,11 @@ export class TagService {
 
   async update(id: string, tag: Tag): Promise<Tag> {
     return this.tagModel
+<<<<<<< HEAD
       .findOneAndUpdate({ _id: new ObjectId(id) }, tag, { new: true })
+=======
+      .findOneAndUpdate({ id: id }, tag, { new: true })
+>>>>>>> 59b85be63f650fff9714c4e80a1896fcea16f830
       .exec();
   }
 

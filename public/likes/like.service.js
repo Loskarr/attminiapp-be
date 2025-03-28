@@ -29,7 +29,9 @@ let LikeService = class LikeService {
         await this.likeModel.deleteOne({ user: user, post: post }).exec();
     }
     async isLiked(user, post) {
-        const like = await this.likeModel.findOne({ user: user, post: post }).exec();
+        const like = await this.likeModel
+            .findOne({ user: user, post: post })
+            .exec();
         return !!like;
     }
     async getLikesForPost(post) {

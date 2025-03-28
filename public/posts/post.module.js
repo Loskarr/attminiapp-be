@@ -19,7 +19,11 @@ let PostsModule = class PostsModule {
 exports.PostsModule = PostsModule;
 exports.PostsModule = PostsModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: post_schema_1.Post.name, schema: post_schema_1.PostSchema }]), like_module_1.LikeModule, comment_module_1.CommentModule],
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: post_schema_1.Post.name, schema: post_schema_1.PostSchema }]),
+            like_module_1.LikeModule,
+            comment_module_1.CommentModule,
+        ],
         providers: [post_service_1.PostsService],
         controllers: [post_controller_1.PostsController],
     })

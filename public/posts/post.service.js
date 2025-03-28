@@ -16,21 +16,40 @@ exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const mongodb_1 = require("mongodb");
 const post_schema_1 = require("./post.schema");
 let PostsService = class PostsService {
     constructor(postModel) {
         this.postModel = postModel;
     }
-    async findPosts(limit, skip, category) {
+    async findPosts(limit, skip, category, sortBy, query) {
         const filter = {};
         if (category) {
             filter.post_categories = { $in: [category] };
         }
-        return this.postModel.find(filter).skip(skip).limit(limit).exec();
+        if (query) {
+            filter.$or = [
+                { title: { $regex: query, $options: 'i' } },
+            ];
+        }
+        let sortOptions = {};
+        if (sortBy === 'view') {
+            sortOptions = { view: -1 };
+        }
+        else if (sortBy === 'created_at') {
+            sortOptions = { createdAt: -1 };
+        }
+        else {
+            sortOptions = { createdAt: -1 };
+        }
+        return this.postModel
+            .find(filter)
+            .skip(skip)
+            .limit(limit)
+            .sort(sortOptions)
+            .exec();
     }
     async findOne(id) {
-        return this.postModel.findOne({ _id: new mongodb_1.ObjectId(id) }).exec();
+        return this.postModel.findOne({ _id: id }).exec();
     }
     async create(post) {
         const newPost = new this.postModel(post);
@@ -38,17 +57,34 @@ let PostsService = class PostsService {
     }
     async incrementLikes(postId) {
         return this.postModel
-            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, { $inc: { like: 1 } }, { new: true })
+            .findOneAndUpdate({ _id: postId }, { $inc: { like: 1 } }, { new: true })
             .exec();
     }
     async decrementLikes(postId) {
         return this.postModel
-            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, { $inc: { like: -1 } }, { new: true })
+            .findOneAndUpdate({ _id: postId }, { $inc: { like: -1 } }, { new: true })
             .exec();
     }
     async incrementComments(postId) {
         return this.postModel
-            .findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, { $inc: { comment: 1 } }, { new: true })
+            .findOneAndUpdate({ _id: postId }, { $inc: { comment: 1 } }, { new: true })
+            .exec();
+    }
+    async decrementComments(postId) {
+        return this.postModel
+            .findOneAndUpdate({ _id: postId }, { $inc: { comment: -1 } }, { new: true })
+            .exec();
+    }
+    async searchPosts(query, limit, skip) {
+        return this.postModel
+            .find({
+            $or: [
+                { title: { $regex: query, $options: 'i' } },
+                { tags: { $in: [query] } },
+            ],
+        })
+            .skip(skip)
+            .limit(limit)
             .exec();
     }
 };

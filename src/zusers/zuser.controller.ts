@@ -1,14 +1,13 @@
-import { Controller, Get, Post, Param, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiBody,
   ApiParam,
   ApiCreatedResponse,
-  ApiQuery,
 } from '@nestjs/swagger';
 import { UserService } from './zuser.service';
-import { ZUser as zuserModel } from './zuser.schema';  // Changed User to ZUser and userModel to zuserModel
+import { ZUser as zuserModel } from './zuser.schema'; // Changed User to ZUser and userModel to zuserModel
 
 @Controller('user')
 @ApiTags('user')
@@ -24,7 +23,8 @@ export class UserController {
   @ApiCreatedResponse({
     description: 'The record has been successfully retrieved.',
   })
-  async findOne(@Param('id') id: string): Promise<zuserModel> {  // Changed userModel to zuserModel
+  async findOne(@Param('id') id: string): Promise<zuserModel> {
+    // Changed userModel to zuserModel
     return this.userService.findOne(id);
   }
 
@@ -36,7 +36,8 @@ export class UserController {
   @ApiCreatedResponse({
     description: 'The record has been successfully retrieved.',
   })
-  async findAll(): Promise<zuserModel[]> {  // Changed userModel to zuserModel
+  async findAll(): Promise<zuserModel[]> {
+    // Changed userModel to zuserModel
     return this.userService.findAll();
   }
 
@@ -76,7 +77,8 @@ export class UserController {
     @Body('id') id: string,
     @Body('name') name: string,
     @Body('avatar') avatar: string,
-  ): Promise<zuserModel | string> {  // Changed userModel to zuserModel
+  ): Promise<zuserModel | string> {
+    // Changed userModel to zuserModel
     return this.userService.createUser(id, name, avatar);
   }
 
