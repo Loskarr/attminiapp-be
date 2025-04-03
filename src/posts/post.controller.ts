@@ -99,7 +99,12 @@ export class PostsController {
     description: 'The record has been successfully retrieved.',
   })
   async findOne(@Param('id') id: string): Promise<PostModel> {
-    return this.postsService.findOne(id);
+    const post = await this.postsService.findOne(id);
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    await this.postsService.incrementViews(id);
+    return post;
   }
 
   @Post()

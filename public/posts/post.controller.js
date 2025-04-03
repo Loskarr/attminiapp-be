@@ -31,7 +31,12 @@ let PostsController = class PostsController {
         return this.postsService.findPosts(limit, skip, category, sortBy, query);
     }
     async findOne(id) {
-        return this.postsService.findOne(id);
+        const post = await this.postsService.findOne(id);
+        if (!post) {
+            throw new common_1.NotFoundException('Post not found');
+        }
+        await this.postsService.incrementViews(id);
+        return post;
     }
     async create(post) {
         return this.postsService.create(post);

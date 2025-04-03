@@ -36,4 +36,5 @@ export declare class PostsService {
     incrementComments(postId: string): Promise<Post>;
     decrementComments(postId: string): Promise<Post>;
     searchPosts(query: string, limit: number, skip: number): Promise<Post[]>;
+    incrementViews(postId: string): Promise<Post>;
 }

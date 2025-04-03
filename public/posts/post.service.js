@@ -87,6 +87,11 @@ let PostsService = class PostsService {
             .limit(limit)
             .exec();
     }
+    async incrementViews(postId) {
+        return this.postModel
+            .findOneAndUpdate({ _id: postId }, { $inc: { view: 1 } }, { new: true })
+            .exec();
+    }
 };
 exports.PostsService = PostsService;
 exports.PostsService = PostsService = __decorate([

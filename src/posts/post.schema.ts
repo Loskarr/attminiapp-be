@@ -68,7 +68,7 @@ export class Post extends Document {
   @Prop()
   approved_by_name: string;
 
-  @Prop()
+  @Prop({ default: 0 })
   view: number;
 
   @Prop()

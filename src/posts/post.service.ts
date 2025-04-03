@@ -103,4 +103,9 @@ export class PostsService {
       .limit(limit)
       .exec();
   }
+  async incrementViews(postId: string): Promise<Post> {
+    return this.postModel
+      .findOneAndUpdate({ _id: postId }, { $inc: { view: 1 } }, { new: true })
+      .exec();
+  }
 }
