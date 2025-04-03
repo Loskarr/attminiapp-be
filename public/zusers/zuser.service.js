@@ -1,75 +1,52 @@
-'use strict';
-var __decorate =
-  (this && this.__decorate) ||
-  function (decorators, target, key, desc) {
-    var c = arguments.length,
-      r =
-        c < 3
-          ? target
-          : desc === null
-            ? (desc = Object.getOwnPropertyDescriptor(target, key))
-            : desc,
-      d;
-    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if ((d = decorators[i]))
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-var __metadata =
-  (this && this.__metadata) ||
-  function (k, v) {
-    if (typeof Reflect === 'object' && typeof Reflect.metadata === 'function')
-      return Reflect.metadata(k, v);
-  };
-var __param =
-  (this && this.__param) ||
-  function (paramIndex, decorator) {
-    return function (target, key) {
-      decorator(target, key, paramIndex);
-    };
-  };
-Object.defineProperty(exports, '__esModule', { value: true });
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
-const common_1 = require('@nestjs/common');
-const mongoose_1 = require('@nestjs/mongoose');
-const mongoose_2 = require('mongoose');
-const zuser_schema_1 = require('./zuser.schema');
+const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
+const zuser_schema_1 = require("./zuser.schema");
 let UserService = class UserService {
-  constructor(zuserModel) {
-    this.zuserModel = zuserModel;
-  }
-  async findOne(id) {
-    const data = await this.zuserModel.findOne({ id: id }).exec();
-    console.log(data);
-    return data;
-  }
-  async findAll() {
-    const data = await this.zuserModel.find().exec();
-    return data;
-  }
-  async findByName(nameFind) {
-    const data = await this.zuserModel.findOne({ name: nameFind }).exec();
-    console.log(data);
-    return data;
-  }
-  async isExist(id) {
-    return await this.zuserModel.findOne({ id }).exec();
-  }
-  async createUser(id, name, avatar) {
-    const newUser = new this.zuserModel({ id, name, avatar });
-    return await newUser.save();
-  }
+    constructor(zuserModel) {
+        this.zuserModel = zuserModel;
+    }
+    async findOne(id) {
+        const data = await this.zuserModel.findOne({ id: id }).exec();
+        console.log(data);
+        return data;
+    }
+    async findAll() {
+        const data = await this.zuserModel.find().exec();
+        return data;
+    }
+    async findByName(nameFind) {
+        const data = await this.zuserModel.findOne({ name: nameFind }).exec();
+        console.log(data);
+        return data;
+    }
+    async isExist(id) {
+        return await this.zuserModel.findOne({ id }).exec();
+    }
+    async createUser(id, name, avatar) {
+        const newUser = new this.zuserModel({ id, name, avatar });
+        return await newUser.save();
+    }
 };
 exports.UserService = UserService;
-exports.UserService = UserService = __decorate(
-  [
+exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(zuser_schema_1.ZUser.name)),
-    __metadata('design:paramtypes', [mongoose_2.Model]),
-  ],
-  UserService,
-);
+    __metadata("design:paramtypes", [mongoose_2.Model])
+], UserService);
 //# sourceMappingURL=zuser.service.js.map

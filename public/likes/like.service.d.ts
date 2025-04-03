@@ -26,11 +26,11 @@
 import { Model } from 'mongoose';
 import { Like } from './like.schema';
 export declare class LikeService {
-  private likeModel;
-  constructor(likeModel: Model<Like>);
-  likePost(user: string, post: string): Promise<Like>;
-  unlikePost(user: string, post: string): Promise<void>;
-  isLiked(user: string, post: string): Promise<boolean>;
-  getLikesForPost(post: string): Promise<Like[]>;
-  getLikeCountForPost(post: string): Promise<number>;
+    private likeModel;
+    constructor(likeModel: Model<Like>);
+    likePost(user: string, post: string): Promise<Like>;
+    unlikePost(user: string, post: string): Promise<void>;
+    isLiked(user: string, post: string): Promise<boolean>;
+    getLikesForPost(post: string): Promise<Like[]>;
+    getLikeCountForPost(post: string): Promise<number>;
 }

@@ -1,1 +1,2 @@
-export declare class CommentModule {}
+export declare class CommentModule {
+}

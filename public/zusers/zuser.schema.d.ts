@@ -25,37 +25,16 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
 export declare class ZUser extends Document {
-  id: string;
-  name: string;
-  avatar: string;
+    id: string;
+    name: string;
+    avatar: string;
 }
-export declare const ZUserSchema: import('mongoose').Schema<
-  ZUser,
-  import('mongoose').Model<
-    ZUser,
-    any,
-    any,
-    any,
-    Document<unknown, any, ZUser> &
-      ZUser &
-      Required<{
-        _id: unknown;
-      }> & {
-        __v: number;
-      },
-    any
-  >,
-  {},
-  {},
-  {},
-  {},
-  import('mongoose').DefaultSchemaOptions,
-  ZUser,
-  Document<unknown, {}, import('mongoose').FlatRecord<ZUser>> &
-    import('mongoose').FlatRecord<ZUser> &
-    Required<{
-      _id: unknown;
-    }> & {
-      __v: number;
-    }
->;
+export declare const ZUserSchema: import("mongoose").Schema<ZUser, import("mongoose").Model<ZUser, any, any, any, Document<unknown, any, ZUser> & ZUser & Required<{
+    _id: unknown;
+}> & {
+    __v: number;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ZUser, Document<unknown, {}, import("mongoose").FlatRecord<ZUser>> & import("mongoose").FlatRecord<ZUser> & Required<{
+    _id: unknown;
+}> & {
+    __v: number;
+}>;

@@ -26,11 +26,11 @@
 import { Model } from 'mongoose';
 import { Category } from './category.schema';
 export declare class CategoriesService {
-  private categoryModel;
-  constructor(categoryModel: Model<Category>);
-  create(category: Category): Promise<Category>;
-  findAll(): Promise<Category[]>;
-  findOne(id: string): Promise<Category>;
-  update(id: string, category: Category): Promise<Category>;
-  remove(id: string): Promise<void>;
+    private categoryModel;
+    constructor(categoryModel: Model<Category>);
+    create(category: Category): Promise<Category>;
+    findAll(): Promise<Category[]>;
+    findOne(id: string): Promise<Category>;
+    update(id: string, category: Category): Promise<Category>;
+    remove(id: string): Promise<void>;
 }

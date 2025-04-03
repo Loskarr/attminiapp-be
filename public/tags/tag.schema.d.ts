@@ -25,38 +25,17 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
 export declare class Tag extends Document {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
+    id: string;
+    name: string;
+    slug: string;
+    description: string;
 }
-export declare const TagSchema: import('mongoose').Schema<
-  Tag,
-  import('mongoose').Model<
-    Tag,
-    any,
-    any,
-    any,
-    Document<unknown, any, Tag> &
-      Tag &
-      Required<{
-        _id: unknown;
-      }> & {
-        __v: number;
-      },
-    any
-  >,
-  {},
-  {},
-  {},
-  {},
-  import('mongoose').DefaultSchemaOptions,
-  Tag,
-  Document<unknown, {}, import('mongoose').FlatRecord<Tag>> &
-    import('mongoose').FlatRecord<Tag> &
-    Required<{
-      _id: unknown;
-    }> & {
-      __v: number;
-    }
->;
+export declare const TagSchema: import("mongoose").Schema<Tag, import("mongoose").Model<Tag, any, any, any, Document<unknown, any, Tag> & Tag & Required<{
+    _id: unknown;
+}> & {
+    __v: number;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Tag, Document<unknown, {}, import("mongoose").FlatRecord<Tag>> & import("mongoose").FlatRecord<Tag> & Required<{
+    _id: unknown;
+}> & {
+    __v: number;
+}>;

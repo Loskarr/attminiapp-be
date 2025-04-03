@@ -27,12 +27,12 @@ import { Model } from 'mongoose';
 import { Comment } from './comment.schema';
 import { UserService } from '../zusers/zuser.service';
 export declare class CommentService {
-  private commentModel;
-  private readonly userService;
-  constructor(commentModel: Model<Comment>, userService: UserService);
-  createComment(user: string, post: string, content: string): Promise<Comment>;
-  getCommentsByPostId(postId: string): Promise<Comment[]>;
-  getCommentById(commentId: string): Promise<Comment>;
-  deleteComment(commentId: string): Promise<void>;
-  updateComment(commentId: string, content: string): Promise<Comment>;
+    private commentModel;
+    private readonly userService;
+    constructor(commentModel: Model<Comment>, userService: UserService);
+    createComment(user: string, post: string, content: string): Promise<Comment>;
+    getCommentsByPostId(postId: string): Promise<Comment[]>;
+    getCommentById(commentId: string): Promise<Comment>;
+    deleteComment(commentId: string): Promise<void>;
+    updateComment(commentId: string, content: string): Promise<Comment>;
 }

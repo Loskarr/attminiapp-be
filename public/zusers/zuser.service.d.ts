@@ -26,11 +26,11 @@
 import { Model } from 'mongoose';
 import { ZUser } from './zuser.schema';
 export declare class UserService {
-  private zuserModel;
-  constructor(zuserModel: Model<ZUser>);
-  findOne(id: string): Promise<ZUser>;
-  findAll(): Promise<ZUser[]>;
-  findByName(nameFind: string): Promise<ZUser>;
-  isExist(id: string): Promise<any>;
-  createUser(id: string, name: string, avatar: string): Promise<ZUser>;
+    private zuserModel;
+    constructor(zuserModel: Model<ZUser>);
+    findOne(id: string): Promise<ZUser>;
+    findAll(): Promise<ZUser[]>;
+    findByName(nameFind: string): Promise<ZUser>;
+    isExist(id: string): Promise<any>;
+    createUser(id: string, name: string, avatar: string): Promise<ZUser>;
 }
