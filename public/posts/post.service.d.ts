@@ -26,15 +26,21 @@
 import { Model } from 'mongoose';
 import { Post } from './post.schema';
 export declare class PostsService {
-    private postModel;
-    constructor(postModel: Model<Post>);
-    findPosts(limit: number, skip: number, category?: string, sortBy?: string, query?: string): Promise<Post[]>;
-    findOne(id: string): Promise<Post>;
-    create(post: Post): Promise<Post>;
-    incrementLikes(postId: string): Promise<Post>;
-    decrementLikes(postId: string): Promise<Post>;
-    incrementComments(postId: string): Promise<Post>;
-    decrementComments(postId: string): Promise<Post>;
-    searchPosts(query: string, limit: number, skip: number): Promise<Post[]>;
-    incrementViews(postId: string): Promise<Post>;
+  private postModel;
+  constructor(postModel: Model<Post>);
+  findPosts(
+    limit: number,
+    skip: number,
+    category?: string,
+    sortBy?: string,
+    query?: string,
+  ): Promise<Post[]>;
+  findOne(id: string): Promise<Post>;
+  create(post: Post): Promise<Post>;
+  incrementLikes(postId: string): Promise<Post>;
+  decrementLikes(postId: string): Promise<Post>;
+  incrementComments(postId: string): Promise<Post>;
+  decrementComments(postId: string): Promise<Post>;
+  searchPosts(query: string, limit: number, skip: number): Promise<Post[]>;
+  incrementViews(postId: string): Promise<Post>;
 }

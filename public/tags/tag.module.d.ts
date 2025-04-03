@@ -1,2 +1,1 @@
-export declare class TagModule {
-}
+export declare class TagModule {}

@@ -25,49 +25,70 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
 declare class Media {
-    ytb_video_id: string;
+  ytb_video_id: string;
 }
 export declare class Post extends Document {
-    id: string;
-    title: string;
-    slug: string;
-    short_desc: string;
-    content: string;
-    thumbnail_url: string;
-    has_audio: number;
-    media: Media;
-    taxonomy_ids: string[];
-    post_categories: string[];
-    post_category_details: string[];
-    taxonomies: string;
-    status: string;
-    post_format: string;
-    status_name: string;
-    publish_date: string;
-    author: string;
-    is_approved: boolean;
-    approved_by: string;
-    approved_by_name: string;
-    view: number;
-    is_featured: number;
-    keyword: string;
-    post_type: string;
-    tags: string[];
-    created_at: string;
-    created_by: string;
-    updated_at: string;
-    updated_by: string;
-    like: number;
-    comment: number;
-    createdAt: Date;
+  id: string;
+  title: string;
+  slug: string;
+  short_desc: string;
+  content: string;
+  thumbnail_url: string;
+  has_audio: number;
+  media: Media;
+  taxonomy_ids: string[];
+  post_categories: string[];
+  post_category_details: string[];
+  taxonomies: string;
+  status: string;
+  post_format: string;
+  status_name: string;
+  publish_date: string;
+  author: string;
+  is_approved: boolean;
+  approved_by: string;
+  approved_by_name: string;
+  view: number;
+  is_featured: number;
+  keyword: string;
+  post_type: string;
+  tags: string[];
+  created_at: string;
+  created_by: string;
+  updated_at: string;
+  updated_by: string;
+  like: number;
+  comment: number;
+  createdAt: Date;
 }
-export declare const PostSchema: import("mongoose").Schema<Post, import("mongoose").Model<Post, any, any, any, Document<unknown, any, Post> & Post & Required<{
-    _id: unknown;
-}> & {
-    __v: number;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Post, Document<unknown, {}, import("mongoose").FlatRecord<Post>> & import("mongoose").FlatRecord<Post> & Required<{
-    _id: unknown;
-}> & {
-    __v: number;
-}>;
+export declare const PostSchema: import('mongoose').Schema<
+  Post,
+  import('mongoose').Model<
+    Post,
+    any,
+    any,
+    any,
+    Document<unknown, any, Post> &
+      Post &
+      Required<{
+        _id: unknown;
+      }> & {
+        __v: number;
+      },
+    any
+  >,
+  {},
+  {},
+  {},
+  {},
+  import('mongoose').DefaultSchemaOptions,
+  Post,
+  Document<unknown, {}, import('mongoose').FlatRecord<Post>> &
+    import('mongoose').FlatRecord<Post> &
+    Required<{
+      _id: unknown;
+    }> & {
+      __v: number;
+    }
+>;
 export {};
