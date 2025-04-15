@@ -40,6 +40,9 @@ let LikeService = class LikeService {
     async getLikeCountForPost(post) {
         return this.likeModel.countDocuments({ post: post }).exec();
     }
+    async getLikedPostsByUser(userId) {
+        return this.likeModel.find({ user: userId }).exec();
+    }
 };
 exports.LikeService = LikeService;
 exports.LikeService = LikeService = __decorate([

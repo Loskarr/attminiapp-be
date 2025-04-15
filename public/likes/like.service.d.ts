@@ -33,4 +33,5 @@ export declare class LikeService {
     isLiked(user: string, post: string): Promise<boolean>;
     getLikesForPost(post: string): Promise<Like[]>;
     getLikeCountForPost(post: string): Promise<number>;
+    getLikedPostsByUser(userId: string): Promise<Like[]>;
 }

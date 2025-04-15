@@ -12,6 +12,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const zuser_service_1 = require("./zuser.service");
 const zuser_controller_1 = require("./zuser.controller");
 const zuser_schema_1 = require("./zuser.schema");
+const like_module_1 = require("../likes/like.module");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
@@ -19,6 +20,7 @@ exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([{ name: zuser_schema_1.ZUser.name, schema: zuser_schema_1.ZUserSchema }]),
+            like_module_1.LikeModule,
         ],
         providers: [zuser_service_1.UserService],
         controllers: [zuser_controller_1.UserController],

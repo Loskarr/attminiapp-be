@@ -35,4 +35,8 @@ export class LikeService {
     // Changed Post to string
     return this.likeModel.countDocuments({ post: post }).exec();
   }
+
+  async getLikedPostsByUser(userId: string): Promise<Like[]> {
+    return this.likeModel.find({ user: userId }).exec();
+  }
 }

@@ -16,9 +16,15 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const zuser_service_1 = require("./zuser.service");
+const like_service_1 = require("../likes/like.service");
 let UserController = class UserController {
-    constructor(userService) {
+    constructor(userService, likeService) {
         this.userService = userService;
+        this.likeService = likeService;
+    }
+    async getLikedPosts(req) {
+        const userId = req.headers['userid'];
+        return this.likeService.getLikedPostsByUser(userId);
     }
     async findOne(id) {
         return this.userService.findOne(id);
@@ -34,6 +40,21 @@ let UserController = class UserController {
     }
 };
 exports.UserController = UserController;
+__decorate([
+    (0, common_1.Get)('liked'),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get posts liked by a user',
+        description: 'Retrieve all posts liked by the authenticated user',
+    }),
+    (0, swagger_1.ApiHeader)({ name: 'userId', description: 'ID of the user' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The liked posts have been successfully retrieved.',
+    }),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Request]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getLikedPosts", null);
 __decorate([
     (0, common_1.Get)('getId/:id'),
     (0, swagger_1.ApiOperation)({
@@ -107,6 +128,7 @@ __decorate([
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
     (0, swagger_1.ApiTags)('user'),
-    __metadata("design:paramtypes", [zuser_service_1.UserService])
+    __metadata("design:paramtypes", [zuser_service_1.UserService,
+        like_service_1.LikeService])
 ], UserController);
 //# sourceMappingURL=zuser.controller.js.map
