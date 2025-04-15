@@ -24,6 +24,7 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
 declare class Media {
     ytb_video_id: string;
 }
@@ -37,7 +38,7 @@ export declare class Post extends Document {
     has_audio: number;
     media: Media;
     taxonomy_ids: string[];
-    post_categories: string[];
+    post_categories: mongoose.Types.ObjectId[];
     post_category_details: string[];
     taxonomies: string;
     status: string;
@@ -52,7 +53,7 @@ export declare class Post extends Document {
     is_featured: number;
     keyword: string;
     post_type: string;
-    tags: string[];
+    tags: mongoose.Types.ObjectId[];
     created_at: string;
     created_by: string;
     updated_at: string;
@@ -61,11 +62,11 @@ export declare class Post extends Document {
     comment: number;
     createdAt: Date;
 }
-export declare const PostSchema: import("mongoose").Schema<Post, import("mongoose").Model<Post, any, any, any, Document<unknown, any, Post> & Post & Required<{
+export declare const PostSchema: mongoose.Schema<Post, mongoose.Model<Post, any, any, any, Document<unknown, any, Post> & Post & Required<{
     _id: unknown;
 }> & {
     __v: number;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Post, Document<unknown, {}, import("mongoose").FlatRecord<Post>> & import("mongoose").FlatRecord<Post> & Required<{
+}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, Post, Document<unknown, {}, mongoose.FlatRecord<Post>> & mongoose.FlatRecord<Post> & Required<{
     _id: unknown;
 }> & {
     __v: number;

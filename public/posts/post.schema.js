@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostSchema = exports.Post = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const mongoose = require("mongoose");
 class Media {
 }
 __decorate([
@@ -58,7 +59,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Post.prototype, "taxonomy_ids", void 0);
 __decorate([
-    (0, mongoose_1.Prop)([String]),
+    (0, mongoose_1.Prop)([{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }]),
     __metadata("design:type", Array)
 ], Post.prototype, "post_categories", void 0);
 __decorate([
@@ -118,7 +119,7 @@ __decorate([
     __metadata("design:type", String)
 ], Post.prototype, "post_type", void 0);
 __decorate([
-    (0, mongoose_1.Prop)([String]),
+    (0, mongoose_1.Prop)([{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }]),
     __metadata("design:type", Array)
 ], Post.prototype, "tags", void 0);
 __decorate([

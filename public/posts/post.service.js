@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const post_schema_1 = require("./post.schema");
+const mongodb_1 = require("mongodb");
 let PostsService = class PostsService {
     constructor(postModel) {
         this.postModel = postModel;
@@ -24,7 +25,7 @@ let PostsService = class PostsService {
     async findPosts(limit, skip, category, sortBy, query) {
         const filter = {};
         if (category) {
-            filter.post_categories = { $in: [category] };
+            filter.post_categories = { $in: [new mongodb_1.ObjectId(category)] };
         }
         if (query) {
             filter.$or = [
@@ -46,10 +47,16 @@ let PostsService = class PostsService {
             .skip(skip)
             .limit(limit)
             .sort(sortOptions)
+            .populate('post_categories')
+            .populate('tags')
             .exec();
     }
     async findOne(id) {
-        return this.postModel.findOne({ _id: id }).exec();
+        return this.postModel
+            .findById(new mongodb_1.ObjectId(id))
+            .populate('post_categories')
+            .populate('tags')
+            .exec();
     }
     async create(post) {
         const newPost = new this.postModel(post);

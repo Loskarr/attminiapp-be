@@ -30,7 +30,7 @@ let TagService = class TagService {
         return this.tagModel.find().exec();
     }
     async findOne(id) {
-        return this.tagModel.findOne({ _id: new mongodb_1.ObjectId(id) }).exec();
+        return this.tagModel.findById(new mongodb_1.ObjectId(id)).exec();
     }
     async update(id, tag) {
         return this.tagModel

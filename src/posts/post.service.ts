@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Post } from './post.schema';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class PostsService {
@@ -16,7 +17,7 @@ export class PostsService {
   ): Promise<Post[]> {
     const filter: any = {};
     if (category) {
-      filter.post_categories = { $in: [category] };
+      filter.post_categories = { $in: [new ObjectId(category)] };
     }
     if (query) {
       filter.$or = [
@@ -29,9 +30,9 @@ export class PostsService {
 
     let sortOptions = {};
     if (sortBy === 'view') {
-      sortOptions = { view: -1 }; // Sort by view count descending
+      sortOptions = { view: -1 };
     } else if (sortBy === 'created_at') {
-      sortOptions = { createdAt: -1 }; // Sort by createdAt descending
+      sortOptions = { createdAt: -1 };
     } else {
       sortOptions = { createdAt: -1 };
     }
@@ -41,11 +42,17 @@ export class PostsService {
       .skip(skip)
       .limit(limit)
       .sort(sortOptions)
+      .populate('post_categories')
+      .populate('tags')
       .exec();
   }
 
   async findOne(id: string): Promise<Post> {
-    return this.postModel.findOne({ _id: id }).exec();
+    return this.postModel
+      .findById(new ObjectId(id))
+      .populate('post_categories')
+      .populate('tags')
+      .exec();
   }
 
   async create(post: Post): Promise<Post> {

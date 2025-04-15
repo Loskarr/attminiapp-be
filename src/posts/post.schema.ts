@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
 
 class Media {
   @Prop()
@@ -35,8 +36,8 @@ export class Post extends Document {
   @Prop([String])
   taxonomy_ids: string[];
 
-  @Prop([String])
-  post_categories: string[];
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }])
+  post_categories: mongoose.Types.ObjectId[];
 
   @Prop([String])
   post_category_details: string[];
@@ -80,8 +81,8 @@ export class Post extends Document {
   @Prop()
   post_type: string;
 
-  @Prop([String])
-  tags: string[];
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }])
+  tags: mongoose.Types.ObjectId[];
 
   @Prop()
   created_at: string;

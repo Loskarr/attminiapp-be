@@ -19,7 +19,7 @@ export class CategoriesService {
   }
 
   async findOne(id: string): Promise<Category> {
-    return this.categoryModel.findById({ _id: new ObjectId(id) }).exec();
+    return this.categoryModel.findById(new ObjectId(id)).exec();
   }
 
   async update(id: string, category: Category): Promise<Category> {
