@@ -55,8 +55,4 @@ pids
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 env
-public/tsconfig.build.tsbuildinfo
-public/posts/post.controller.js
-public/posts/post.schema.js
-public/posts/post.service.d.ts
-public/posts/post.service.js
+public/
