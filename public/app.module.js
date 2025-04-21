@@ -16,7 +16,6 @@ const post_module_1 = require("./posts/post.module");
 const zuser_module_1 = require("./zusers/zuser.module");
 const categories_module_1 = require("./categories/categories.module");
 const tag_module_1 = require("./tags/tag.module");
-const chatbot_module_1 = require("./chatbot/chatbot.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -28,7 +27,6 @@ exports.AppModule = AppModule = __decorate([
             zuser_module_1.UserModule,
             categories_module_1.CategoriesModule,
             tag_module_1.TagModule,
-            chatbot_module_1.ChatbotModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -5,8 +5,5 @@ declare const config: {
     server: {
         port: number;
     };
-    gemini: {
-        apiKey: string;
-    };
 };
 export default config;

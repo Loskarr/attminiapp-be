@@ -7,7 +7,6 @@ import { PostsModule } from './posts/post.module';
 import { UserModule } from './zusers/zuser.module';
 import { CategoriesModule } from './categories/categories.module';
 import { TagModule } from './tags/tag.module';
-import { ChatbotModule } from './chatbot/chatbot.module';
 
 @Module({
   imports: [
@@ -16,7 +15,6 @@ import { ChatbotModule } from './chatbot/chatbot.module';
     UserModule,
     CategoriesModule,
     TagModule,
-    ChatbotModule,
   ],
   controllers: [AppController],
   providers: [AppService],
