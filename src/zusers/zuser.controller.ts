@@ -10,7 +10,7 @@ import {
 import { UserService } from './zuser.service';
 import { LikeService } from '../likes/like.service';
 import { Like } from '../likes/like.schema';
-import { ZUser as zuserModel } from './zuser.schema'; // Changed User to ZUser and userModel to zuserModel
+import { ZUser as zuserModel } from './zuser.schema';
 
 @Controller('user')
 @ApiTags('user')
@@ -44,7 +44,6 @@ export class UserController {
     description: 'The record has been successfully retrieved.',
   })
   async findOne(@Param('id') id: string): Promise<zuserModel> {
-    // Changed userModel to zuserModel
     return this.userService.findOne(id);
   }
 
@@ -57,7 +56,6 @@ export class UserController {
     description: 'The record has been successfully retrieved.',
   })
   async findAll(): Promise<zuserModel[]> {
-    // Changed userModel to zuserModel
     return this.userService.findAll();
   }
 
@@ -98,7 +96,6 @@ export class UserController {
     @Body('name') name: string,
     @Body('avatar') avatar: string,
   ): Promise<zuserModel | string> {
-    // Changed userModel to zuserModel
     return this.userService.createUser(id, name, avatar);
   }
 

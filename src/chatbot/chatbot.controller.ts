@@ -63,20 +63,3 @@ export class ChatbotController {
     return { reply };
   }
 }
-
-// {
-//   "messages": [
-//     {
-//       "role": "user",
-//       "text": "Chào bạn, tôi muốn hỏi về kỹ thuật trồng lúa nước hiệu quả."
-//     },
-//     {
-//       "role": "model",
-//       "text": "Chào bạn! Kỹ thuật trồng lúa nước hiệu quả bao gồm nhiều yếu tố như chọn giống tốt, làm đất kỹ, bón phân cân đối, quản lý nước hợp lý và phòng trừ sâu bệnh kịp thời. Bạn quan tâm cụ thể đến khía cạnh nào ạ?"
-//     },
-//     {
-//       "role": "user",
-//       "text": "Tôi muốn biết về cách bón phân cân đối cho lúa."
-//     }
-//   ]
-// }

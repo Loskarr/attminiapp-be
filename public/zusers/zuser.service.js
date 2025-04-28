@@ -22,7 +22,7 @@ let UserService = class UserService {
         this.zuserModel = zuserModel;
     }
     async findOne(id) {
-        const data = await this.zuserModel.findOne({ id: id }).exec();
+        const data = await this.zuserModel.findOne({ _id: id }).exec();
         console.log(data);
         return data;
     }
