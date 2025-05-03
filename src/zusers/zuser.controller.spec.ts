@@ -35,16 +35,6 @@ describe('UserController', () => {
     expect(userController).toBeDefined();
   });
 
-  describe('getLikedPosts', () => {
-    it('should call likeService.getLikedPostsByUser', async () => {
-      const req = { headers: { userid: userId } } as any;
-
-      await userController.getLikedPosts(req);
-
-      expect(mockLikeService.getLikedPostsByUser).toHaveBeenCalledWith(userId);
-      expect(mockLikeService.getLikedPostsByUser).toHaveBeenCalledTimes(1);
-    });
-  });
   describe('findOne', () => {
     it('should call userService.findOne', async () => {
       await userController.findOne(userId);

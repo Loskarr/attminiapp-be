@@ -24,15 +24,17 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Post } from '../posts/post.schema';
 export declare class Like extends Document {
     user: string;
-    post: string;
+    post: mongoose.Types.ObjectId | Post;
 }
-export declare const LikeSchema: import("mongoose").Schema<Like, import("mongoose").Model<Like, any, any, any, Document<unknown, any, Like> & Like & Required<{
+export declare const LikeSchema: mongoose.Schema<Like, mongoose.Model<Like, any, any, any, Document<unknown, any, Like> & Like & Required<{
     _id: unknown;
 }> & {
     __v: number;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Like, Document<unknown, {}, import("mongoose").FlatRecord<Like>> & import("mongoose").FlatRecord<Like> & Required<{
+}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, Like, Document<unknown, {}, mongoose.FlatRecord<Like>> & mongoose.FlatRecord<Like> & Required<{
     _id: unknown;
 }> & {
     __v: number;

@@ -9,8 +9,10 @@ export declare class PostsController {
     private readonly commentService;
     constructor(postsService: PostsService, likeService: LikeService, commentService: CommentService);
     findAll(page?: number, limit?: number, category?: string, sortBy?: string, query?: string): Promise<PostModel[]>;
-    findOne(id: string): Promise<PostModel>;
     create(post: PostModel): Promise<PostModel>;
+    getLikedPosts(req: Request, sortBy?: string, query?: string): Promise<PostModel[]>;
+    getRecommendations(req: Request, sortBy?: string, query?: string): Promise<PostModel[]>;
+    findOne(id: string): Promise<PostModel>;
     likePost(postId: string, req: Request): Promise<any>;
     isPostLiked(postId: string, req: Request): Promise<{
         isLiked: boolean;

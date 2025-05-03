@@ -89,6 +89,139 @@ export class PostsController {
     return this.postsService.findPosts(limit, skip, category, sortBy, query);
   }
 
+  @Post()
+  @ApiOperation({ summary: 'Create a post', description: 'Create a new post' })
+  @ApiBody({ type: PostModel })
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+  })
+  async create(@Body() post: PostModel): Promise<PostModel> {
+    return this.postsService.create(post);
+  }
+
+  @Get('liked')
+  @ApiOperation({
+    summary: 'Get posts liked by a user',
+    description: 'Retrieve all posts liked by a specific user',
+  })
+  @ApiHeader({ name: 'userId', description: 'ID of the user' })
+  @ApiQuery({
+    name: 'sortBy',
+    type: String,
+    description: 'Sort by view or created_at',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'query',
+    type: String,
+    description: 'Search term to filter posts',
+    required: false,
+  })
+  @ApiCreatedResponse({
+    description: 'The liked posts have been successfully retrieved.',
+    type: [PostModel],
+  })
+  async getLikedPosts(
+    @Req() req: Request,
+    @Query('sortBy') sortBy: string = 'created_at',
+    @Query('query') query?: string,
+  ): Promise<PostModel[]> {
+    const userId = req.headers['userid'] as string;
+
+    let likedPosts = await this.likeService.getLikedPostsByUser(userId);
+
+    if (query) {
+      likedPosts = likedPosts.filter((post) =>
+        post.title.toLowerCase().includes(query.toLowerCase()),
+      );
+    }
+
+    if (sortBy === 'view') {
+      likedPosts.sort((a, b) => b.view - a.view);
+    } else if (sortBy === 'created_at') {
+      likedPosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    }
+
+    return likedPosts;
+  }
+
+  @Get('recommendations')
+  @ApiOperation({
+    summary: 'Get recommended posts for a user',
+    description:
+      'Recommend posts based on user likes and recent posts using Jaccard similarity',
+  })
+  @ApiHeader({ name: 'userId', description: 'ID of the user' })
+  @ApiQuery({
+    name: 'sortBy',
+    type: String,
+    description: 'Sort by view or similarity',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'query',
+    type: String,
+    description: 'Search term to filter posts',
+    required: false,
+  })
+  @ApiCreatedResponse({
+    description: 'The recommended posts have been successfully retrieved.',
+  })
+  async getRecommendations(
+    @Req() req: Request,
+    @Query('sortBy') sortBy: string = 'similarity',
+    @Query('query') query?: string,
+  ): Promise<PostModel[]> {
+    const userId = req.headers['userid'] as string;
+
+    const likedPosts = await this.likeService.getLikedPostsByUser(userId);
+
+    const likedPostTags = new Set(
+      likedPosts.flatMap((post) => post.tags.map((tag) => tag.toString())),
+    );
+
+    let recentPosts = await this.postsService.findPosts(60, 0);
+
+    const likedPostIds = new Set(likedPosts.map((post) => post._id.toString()));
+
+    recentPosts = recentPosts.filter(
+      (post) => !likedPostIds.has(post._id.toString()),
+    );
+
+    if (query) {
+      recentPosts = recentPosts.filter((post) =>
+        post.title.toLowerCase().includes(query.toLowerCase()),
+      );
+    }
+
+    const scoredPosts = recentPosts.map((post) => {
+      const postTags = new Set(post.tags.map((tag) => tag._id.toString()));
+      const intersection = new Set(
+        [...likedPostTags].filter((tag) => postTags.has(tag)),
+      );
+      const union = new Set([...likedPostTags, ...postTags]);
+      const similarity = union.size > 0 ? intersection.size / union.size : 0;
+
+      return { post, similarity };
+    });
+
+    const sortedPosts = scoredPosts
+      .sort((a, b) => {
+        return b.similarity - a.similarity;
+      })
+      .slice(0, 10);
+    if (sortBy === 'view') {
+      return sortedPosts
+        .map((scoredPost) => scoredPost.post)
+        .sort((a, b) => b.view - a.view);
+    } else if (sortBy === 'created_at') {
+      return sortedPosts
+        .map((scoredPost) => scoredPost.post)
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    }
+    return sortedPosts.map((scoredPost) => scoredPost.post);
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Get post by ID',
@@ -105,16 +238,6 @@ export class PostsController {
     }
     await this.postsService.incrementViews(id);
     return post;
-  }
-
-  @Post()
-  @ApiOperation({ summary: 'Create a post', description: 'Create a new post' })
-  @ApiBody({ type: PostModel })
-  @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
-  })
-  async create(@Body() post: PostModel): Promise<PostModel> {
-    return this.postsService.create(post);
   }
 
   @Post(':id/like')

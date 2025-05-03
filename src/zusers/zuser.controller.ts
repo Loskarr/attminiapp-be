@@ -1,15 +1,13 @@
-import { Controller, Get, Post, Param, Body, Req } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiBody,
   ApiParam,
   ApiCreatedResponse,
-  ApiHeader,
 } from '@nestjs/swagger';
 import { UserService } from './zuser.service';
 import { LikeService } from '../likes/like.service';
-import { Like } from '../likes/like.schema';
 import { ZUser as zuserModel } from './zuser.schema';
 
 @Controller('user')
@@ -19,20 +17,6 @@ export class UserController {
     private readonly userService: UserService,
     private readonly likeService: LikeService,
   ) {}
-
-  @Get('liked')
-  @ApiOperation({
-    summary: 'Get posts liked by a user',
-    description: 'Retrieve all posts liked by the authenticated user',
-  })
-  @ApiHeader({ name: 'userId', description: 'ID of the user' })
-  @ApiCreatedResponse({
-    description: 'The liked posts have been successfully retrieved.',
-  })
-  async getLikedPosts(@Req() req: Request): Promise<Like[]> {
-    const userId = req.headers['userid'] as string;
-    return this.likeService.getLikedPostsByUser(userId);
-  }
 
   @Get('getId/:id')
   @ApiOperation({

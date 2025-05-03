@@ -22,26 +22,45 @@ let LikeService = class LikeService {
         this.likeModel = likeModel;
     }
     async likePost(user, post) {
-        const newLike = new this.likeModel({ user: user, post: post });
+        const newLike = new this.likeModel({
+            user,
+            post: new mongoose_2.Types.ObjectId(post),
+        });
         return newLike.save();
     }
     async unlikePost(user, post) {
-        await this.likeModel.deleteOne({ user: user, post: post }).exec();
+        await this.likeModel
+            .deleteOne({
+            user,
+            post: new mongoose_2.Types.ObjectId(post),
+        })
+            .exec();
     }
     async isLiked(user, post) {
         const like = await this.likeModel
-            .findOne({ user: user, post: post })
+            .findOne({
+            user,
+            post: new mongoose_2.Types.ObjectId(post),
+        })
             .exec();
         return !!like;
     }
     async getLikesForPost(post) {
-        return this.likeModel.find({ post: post }).populate('user').exec();
+        return this.likeModel.find({ post: new mongoose_2.Types.ObjectId(post) }).exec();
     }
     async getLikeCountForPost(post) {
-        return this.likeModel.countDocuments({ post: post }).exec();
+        return this.likeModel
+            .countDocuments({ post: new mongoose_2.Types.ObjectId(post) })
+            .exec();
     }
     async getLikedPostsByUser(userId) {
-        return this.likeModel.find({ user: userId }).exec();
+        const likes = await this.likeModel
+            .find({ user: userId })
+            .populate({
+            path: 'post',
+        })
+            .exec();
+        return likes.map((like) => like.post);
     }
 };
 exports.LikeService = LikeService;

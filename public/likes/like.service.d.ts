@@ -25,6 +25,7 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from 'mongoose';
 import { Like } from './like.schema';
+import { Post } from '../posts/post.schema';
 export declare class LikeService {
     private likeModel;
     constructor(likeModel: Model<Like>);
@@ -33,5 +34,5 @@ export declare class LikeService {
     isLiked(user: string, post: string): Promise<boolean>;
     getLikesForPost(post: string): Promise<Like[]>;
     getLikeCountForPost(post: string): Promise<number>;
-    getLikedPostsByUser(userId: string): Promise<Like[]>;
+    getLikedPostsByUser(userId: string): Promise<Post[]>;
 }

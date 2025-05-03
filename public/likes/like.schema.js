@@ -12,18 +12,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LikeSchema = exports.Like = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const zuser_schema_1 = require("../zusers/zuser.schema");
-const post_schema_1 = require("../posts/post.schema");
 let Like = class Like extends mongoose_2.Document {
 };
 exports.Like = Like;
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, ref: zuser_schema_1.ZUser.name, required: true }),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Like.prototype, "user", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, ref: post_schema_1.Post.name, required: true }),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, ref: 'Post', required: true }),
+    __metadata("design:type", Object)
 ], Like.prototype, "post", void 0);
 exports.Like = Like = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true, versionKey: false })

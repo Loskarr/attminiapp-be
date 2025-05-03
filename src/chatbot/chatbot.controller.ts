@@ -52,6 +52,7 @@ export class ChatbotController {
     Bạn cung cấp thông tin chính xác, dễ hiểu, và luôn thân thiện. 
     Hãy trả lời ngắn gọn ( khoảng 200 từ ), tập trung vào việc giải quyết vấn đề của người dùng. 
     Nếu không chắc chắn về câu trả lời, hãy khuyến nghị người dùng tham khảo chuyên gia hoặc nguồn thông tin đáng tin cậy.
+    Luôn thể hiện thái độ gần gũi, đáng tin cậy, không dùng từ ngữ chuyên môn khó hiểu, giúp nông dân yên tâm và dễ dàng áp dụng.
   `,
     };
 
