@@ -16,7 +16,7 @@ export class CommentService {
     post: string,
     content: string,
   ): Promise<Comment> {
-    const foundUser = await this.userService.findOne(user);
+    const foundUser = await this.userService.findByZid(user);
 
     if (!foundUser) {
       throw new Error('User not found');

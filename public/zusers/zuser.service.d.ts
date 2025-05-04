@@ -29,6 +29,7 @@ export declare class UserService {
     private zuserModel;
     constructor(zuserModel: Model<ZUser>);
     findOne(id: string): Promise<ZUser>;
+    findByZid(id: string): Promise<ZUser>;
     findAll(): Promise<ZUser[]>;
     findByName(nameFind: string): Promise<ZUser>;
     isExist(id: string): Promise<any>;

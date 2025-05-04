@@ -7,6 +7,9 @@ export class ZUser extends Document {
   id: string;
 
   @Prop()
+  zid: string;
+
+  @Prop()
   name: string;
 
   @Prop()

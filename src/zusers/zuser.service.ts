@@ -13,6 +13,14 @@ export class UserService {
     return data;
   }
 
+  async findByZid(id: string): Promise<ZUser> {
+    const user = await this.zuserModel.findOne({ zid: id }).exec();
+    if (!user) {
+      throw new Error(`User with zid ${id} not found`);
+    }
+    return user;
+  }
+
   async findAll(): Promise<ZUser[]> {
     const data = await this.zuserModel.find().exec();
     return data;

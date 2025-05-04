@@ -26,6 +26,13 @@ let UserService = class UserService {
         console.log(data);
         return data;
     }
+    async findByZid(id) {
+        const user = await this.zuserModel.findOne({ zid: id }).exec();
+        if (!user) {
+            throw new Error(`User with zid ${id} not found`);
+        }
+        return user;
+    }
     async findAll() {
         const data = await this.zuserModel.find().exec();
         return data;

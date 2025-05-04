@@ -24,7 +24,7 @@ let CommentService = class CommentService {
         this.userService = userService;
     }
     async createComment(user, post, content) {
-        const foundUser = await this.userService.findOne(user);
+        const foundUser = await this.userService.findByZid(user);
         if (!foundUser) {
             throw new Error('User not found');
         }

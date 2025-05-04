@@ -26,6 +26,7 @@
 import { Document } from 'mongoose';
 export declare class ZUser extends Document {
     id: string;
+    zid: string;
     name: string;
     avatar: string;
 }
