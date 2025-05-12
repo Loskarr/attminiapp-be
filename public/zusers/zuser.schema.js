@@ -18,10 +18,6 @@ exports.ZUser = ZUser;
 __decorate([
     (0, mongoose_1.Prop)({ required: true, unique: true }),
     __metadata("design:type", String)
-], ZUser.prototype, "id", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
 ], ZUser.prototype, "zid", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),

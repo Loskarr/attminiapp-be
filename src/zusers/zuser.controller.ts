@@ -43,17 +43,17 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get('checkExist/:id')
+  @Get('checkExist/:zid')
   @ApiOperation({
     summary: 'Check if user exist',
     description: 'Check if user exist',
   })
-  @ApiParam({ name: 'id', type: String, description: 'ID of the user' })
+  @ApiParam({ name: 'zid', type: String, description: 'ZID of the user' })
   @ApiCreatedResponse({
     description: 'The record has been successfully retrieved.',
   })
-  async isExist(@Param('id') id: string): Promise<any> {
-    return this.userService.isExist(id);
+  async isExist(@Param('zid') zid: string): Promise<any> {
+    return this.userService.isExist(zid);
   }
 
   @Post('create')
@@ -65,22 +65,22 @@ export class UserController {
     schema: {
       type: 'object',
       properties: {
-        id: { type: 'string' },
+        zid: { type: 'string' },
         name: { type: 'string' },
         avatar: { type: 'string' },
       },
-      required: ['id', 'name', 'avatar'],
+      required: ['zid', 'name', 'avatar'],
     },
   })
   @ApiCreatedResponse({
     description: 'The user has been successfully created.',
   })
   async createUser(
-    @Body('id') id: string,
+    @Body('zid') zid: string,
     @Body('name') name: string,
     @Body('avatar') avatar: string,
   ): Promise<zuserModel | string> {
-    return this.userService.createUser(id, name, avatar);
+    return this.userService.createUser(zid, name, avatar);
   }
 
   // @Get('name/:name')

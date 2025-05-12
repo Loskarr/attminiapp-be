@@ -33,11 +33,11 @@ export class UserService {
   }
 
   async isExist(id: string): Promise<any> {
-    return await this.zuserModel.findOne({ id }).exec();
+    return await this.zuserModel.findOne({ zid: id }).exec();
   }
 
-  async createUser(id: string, name: string, avatar: string): Promise<ZUser> {
-    const newUser = new this.zuserModel({ id, name, avatar });
+  async createUser(zid: string, name: string, avatar: string): Promise<ZUser> {
+    const newUser = new this.zuserModel({ zid, name, avatar });
     return await newUser.save();
   }
 }

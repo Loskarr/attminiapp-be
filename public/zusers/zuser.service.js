@@ -43,10 +43,10 @@ let UserService = class UserService {
         return data;
     }
     async isExist(id) {
-        return await this.zuserModel.findOne({ id }).exec();
+        return await this.zuserModel.findOne({ zid: id }).exec();
     }
-    async createUser(id, name, avatar) {
-        const newUser = new this.zuserModel({ id, name, avatar });
+    async createUser(zid, name, avatar) {
+        const newUser = new this.zuserModel({ zid, name, avatar });
         return await newUser.save();
     }
 };

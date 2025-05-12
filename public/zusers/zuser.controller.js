@@ -28,11 +28,11 @@ let UserController = class UserController {
     async findAll() {
         return this.userService.findAll();
     }
-    async isExist(id) {
-        return this.userService.isExist(id);
+    async isExist(zid) {
+        return this.userService.isExist(zid);
     }
-    async createUser(id, name, avatar) {
-        return this.userService.createUser(id, name, avatar);
+    async createUser(zid, name, avatar) {
+        return this.userService.createUser(zid, name, avatar);
     }
 };
 exports.UserController = UserController;
@@ -65,16 +65,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('checkExist/:id'),
+    (0, common_1.Get)('checkExist/:zid'),
     (0, swagger_1.ApiOperation)({
         summary: 'Check if user exist',
         description: 'Check if user exist',
     }),
-    (0, swagger_1.ApiParam)({ name: 'id', type: String, description: 'ID of the user' }),
+    (0, swagger_1.ApiParam)({ name: 'zid', type: String, description: 'ZID of the user' }),
     (0, swagger_1.ApiCreatedResponse)({
         description: 'The record has been successfully retrieved.',
     }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('zid')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
@@ -89,17 +89,17 @@ __decorate([
         schema: {
             type: 'object',
             properties: {
-                id: { type: 'string' },
+                zid: { type: 'string' },
                 name: { type: 'string' },
                 avatar: { type: 'string' },
             },
-            required: ['id', 'name', 'avatar'],
+            required: ['zid', 'name', 'avatar'],
         },
     }),
     (0, swagger_1.ApiCreatedResponse)({
         description: 'The user has been successfully created.',
     }),
-    __param(0, (0, common_1.Body)('id')),
+    __param(0, (0, common_1.Body)('zid')),
     __param(1, (0, common_1.Body)('name')),
     __param(2, (0, common_1.Body)('avatar')),
     __metadata("design:type", Function),
